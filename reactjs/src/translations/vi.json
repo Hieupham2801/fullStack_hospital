@@ -1,0 +1,76 @@
+{
+    "header": {
+        "Email": "Email",
+        "First-Name": "Tên",
+        "Last-Name": "Họ",
+        "Address": "Địa chỉ",
+        "Action": "Hành Động"
+    },
+    "home-header": {
+        "Popular-specialty": "chuyên khoa phổ biến",
+        "specialty": "chuyên khoa",
+        "SearchDoctor": "Tìm kiếm bác sĩ theo chuyên khoa",
+        "Health-facility": "Cơ sở y tế",
+        "clinic": "phòng khám",
+        "Choose-clinic": "Chọn bệnh viện phòng khám",
+        "Doctor": "Bác sĩ",
+        "Choose-doctor": "Chọn bác sĩ giỏi",
+        "examination-package": "Gói khám",
+        "General-health-check": "Khám sức khỏe tổng quát",
+        "Support": "Hỗ trợ",
+        "Medical-background": "NỀN TẢNG SỨC KHỎE",
+        "Health-care": "CHĂM SÓC SỨC KHỎE TOÀN DIỆN",
+        "Specialist-examination": "Khám nha khoa",
+        "Remote-examination": "Khám từ xa",
+        "General-examination": "Khám tổng quát",
+        "Medical-test": "Xét nghiệm y học",
+        "Mental-health": "Sức khỏe tinh thần",
+        "Dental-examination": "Khám nha khoa",
+        "Welcome": "Xin chào",
+        "Outstanding-Doctor-Week": "Bác sĩ nổi bật tuần qua",
+        "handbook": "Cẩm nang",
+        "Outstanding-Health-facility": "Cơ sở y tế nổi bật"
+    },
+    "menu": {
+        "system": {
+            "header": "Hệ thống",
+            "system-administrator": {
+                "header": "Quản trị hệ thống",
+                "user-manage": "Quản lý người sử dụng",
+                "user-redux": "Quản lý redux",
+                "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
+            },
+            "system-parameter": {
+                "header": "Tham số hệ thống"
+            }
+        },
+        "admin": {
+            "manage-user": "Quản lý người dùng",
+            "manage-doctor": "Quản lý bác sĩ",
+            "manage-admin": "Quản lý admin",
+            "crud": "CRUD người dùng",
+            "crud-redux": "CRUD người dùng",
+            "clinic": "Phòng khám",
+            "manage-clinic": "Quản lý phòng khám",
+            "specialty": "Chuyên khoa",
+            "manage-specialty": "Quản lý chuyên khoa",
+            "handbook": "Cẩm nang",
+            "manage-handbook": "Quản lý cẩm nang"
+        }
+    },
+    "manage-user": {
+        "Add-user": "thêm mới người dùng",
+        "Email": "Email",
+        "First-Name": "Tên",
+        "Last-Name": "Họ",
+        "Password": "Mật khẩu",
+        "Address": "Địa chỉ",
+        "Phone-number": "Số điện thoại",
+        "Gender": "Giới tính",
+        "Position": "chức danh",
+        "Role": "Vai trò",
+        "Save": "Lưu",
+        "Edit": "Sửa",
+        "Image": "Hình ảnh"
+    }
+}
