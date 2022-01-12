@@ -8,6 +8,7 @@ const initialState = {
   users: [],
   topDoctors: [],
   allDoctors: [],
+  allTime: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -49,11 +50,11 @@ const adminReducer = (state = initialState, action) => {
       };
     // role
     case actionTypes.FETCH_ROLE_SUCCESS:
-      state.role = action.data;    
+      state.role = action.data;
       return {
         ...state,
       };
-    case actionTypes.FETCH_ROLE_FAILDED:      
+    case actionTypes.FETCH_ROLE_FAILDED:
       state.role = [];
       return {
         ...state,
@@ -61,7 +62,7 @@ const adminReducer = (state = initialState, action) => {
     // fetch all  users
     case actionTypes.FETCH_ALL_USER_SUCCESS:
       state.users = action.users;
-     
+
       return {
         ...state,
       };
@@ -72,7 +73,7 @@ const adminReducer = (state = initialState, action) => {
         ...state,
       };
     case actionTypes.FETCH_TOP_DOCTOR_SUCCESS:
-      state.topDoctors = action.dataDoctors;    
+      state.topDoctors = action.dataDoctors;
       return {
         ...state,
       };
@@ -84,12 +85,23 @@ const adminReducer = (state = initialState, action) => {
       };
     case actionTypes.FETCH_ALL_DOCTORS_SUCCESS:
       state.allDoctors = action.data;
-     
+
       return {
         ...state,
       };
     case actionTypes.FETCH_ALL_DOCTORS_FAILDED:
       state.allDoctors = [];
+      console.log("fire fetch top doctor start by action failded", action);
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ALL_CODE_SCHEDULE_HOURS_SUCCESS:
+      state.allTime = action.dataTime;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ALL_CODE_SCHEDULE_HOURS_FAILDED:
+      state.allTime = [];
       console.log("fire fetch top doctor start by action failded", action);
       return {
         ...state,

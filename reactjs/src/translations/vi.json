@@ -31,6 +31,12 @@
         "handbook": "Cẩm nang",
         "Outstanding-Health-facility": "Cơ sở y tế nổi bật"
     },
+    "manage-schedule": {
+        "Title": "Quản lý lịch khám bệnh của bác sĩ",
+        "Choose-doctor": "chọn bác sĩ",
+        "Choose-day": "Chọn ngày",
+        "Save": "Lưu"
+    },
     "menu": {
         "system": {
             "header": "Hệ thống",

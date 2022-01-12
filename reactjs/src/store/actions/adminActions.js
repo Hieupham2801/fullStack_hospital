@@ -243,3 +243,24 @@ export const saveInforDoctor = (data) => {
     }
   };
 };
+// fetch all hours doctor schedule
+export const fetchAllScheduleTime = () => {
+  return async (dispatch) => {
+    try {
+      let res = await GetAllCodeService("TIME");
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_ALL_CODE_SCHEDULE_HOURS_SUCCESS,
+          dataTime: res.data,
+        });
+      } else {
+        toast.error("fetch time failded");
+        dispatch({
+          type: actionTypes.FETCH_ALL_CODE_SCHEDULE_HOURS_FAILDED,
+        });
+      }
+    } catch (e) {
+      toast.error("fetch time failded");
+    }
+  };
+};

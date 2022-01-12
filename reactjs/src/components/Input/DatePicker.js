@@ -73,7 +73,6 @@ class DatePicker extends Component {
         };
         return str;
     }
-
     // autoFormatonBlur = (value) => {
     //     var input = value;
     //     var values = input.split('/').map(function (v, i) {

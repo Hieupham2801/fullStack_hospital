@@ -30,6 +30,13 @@
         "handbook": "Hand book",
         "Outstanding-Health-facility": "Outstanding health facility"
     },
+    "manage-schedule": {
+        "Title": "Manage Doctor's schedule",
+        "Choose-doctor": "Choose Doctor",
+        "Choose-day": "Choose day",
+        "Save": "Save"
+
+    },
     "menu": {
         "system": {
             "header": "System",
