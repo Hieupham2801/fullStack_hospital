@@ -49,13 +49,11 @@ const adminReducer = (state = initialState, action) => {
       };
     // role
     case actionTypes.FETCH_ROLE_SUCCESS:
-      state.role = action.data;
-      console.log("fire fetch role start by action success", action);
+      state.role = action.data;    
       return {
         ...state,
       };
-    case actionTypes.FETCH_ROLE_FAILDED:
-      console.log("fire fetch role start by action faided", action);
+    case actionTypes.FETCH_ROLE_FAILDED:      
       state.role = [];
       return {
         ...state,
@@ -63,7 +61,7 @@ const adminReducer = (state = initialState, action) => {
     // fetch all  users
     case actionTypes.FETCH_ALL_USER_SUCCESS:
       state.users = action.users;
-      console.log("fire fetch all user start by action success", action);
+     
       return {
         ...state,
       };
@@ -74,8 +72,7 @@ const adminReducer = (state = initialState, action) => {
         ...state,
       };
     case actionTypes.FETCH_TOP_DOCTOR_SUCCESS:
-      state.topDoctors = action.dataDoctors;
-      console.log("fire fetch top doctor start by action success", action);
+      state.topDoctors = action.dataDoctors;    
       return {
         ...state,
       };
@@ -87,7 +84,7 @@ const adminReducer = (state = initialState, action) => {
       };
     case actionTypes.FETCH_ALL_DOCTORS_SUCCESS:
       state.allDoctors = action.data;
-      console.log("fire fetch top doctor start by action success", action);
+     
       return {
         ...state,
       };

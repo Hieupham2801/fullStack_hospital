@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HeaderHomePage from "../../HomePage/HeaderHomePage";
+import { LANGUAGES } from "../../../utils";
 import { getDetailInforDoctor } from "../../../services/userService";
 import "./DoctorDetail.scss";
 class DetailDoctor extends Component {
@@ -28,11 +29,15 @@ class DetailDoctor extends Component {
   }
   componentDidUpdate() {}
   render() {
+    let { language } = this.props;
     let { DetailDoctors } = this.state;
-    let nameVi = "";
-    let nameEn = "";
-    if (DetailDoctor) {
-      // if (DetailDoctors && detai)
+    let nameVi = "",
+      nameEn = "";
+    nameVi = ` ${DetailDoctors.lastName} ${DetailDoctors.firstName}`;
+    nameEn = `${DetailDoctors.firstName} ${DetailDoctors.lastName}`;
+    if (DetailDoctors && DetailDoctors.positionData) {
+      nameVi = `${DetailDoctors.positionData.valueVi},  ${DetailDoctors.lastName} ${DetailDoctors.firstName}`;
+      nameEn = `${DetailDoctors.positionData.valueEn}, ${DetailDoctors.firstName} ${DetailDoctors.lastName}`;
     }
     console.log("check state", this.state);
     return (
@@ -45,17 +50,34 @@ class DetailDoctor extends Component {
               style={{ backgroundImage: `url(${DetailDoctors.image})` }}
             ></div>
             <div className="content-right">
-              <div className="up">{DetailDoctors.positionData}</div>
+              <div className="up">
+                {language === LANGUAGES.VI ? nameVi : nameEn}
+              </div>
               <div className="down">
                 {DetailDoctors.Markdown &&
                   DetailDoctors.Markdown.description && (
                     <span>{DetailDoctors.Markdown.description}</span>
                   )}
+
+                <div className="icon my-2">
+                  <button className="btn btn-primary px-2 ">
+                    <i class="far fa-thumbs-up"></i> Thích
+                  </button>
+                  <button className="btn btn-primary px-2 ">Chia sẻ</button>
+                </div>
               </div>
             </div>
           </div>
           <div className="schedule-doctor"></div>
-          <div className="detail-doctor"></div>
+          <div className="detail-doctor">
+            {DetailDoctors.Markdown && DetailDoctors.Markdown.contentHTML && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: DetailDoctors.Markdown.contentHTML,
+                }}
+              ></div>
+            )}
+          </div>
           <div className="comment-doctor"></div>
         </div>
       </>
@@ -64,7 +86,9 @@ class DetailDoctor extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    language: state.app.language,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

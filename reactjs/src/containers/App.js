@@ -11,15 +11,12 @@ import {
 } from "../hoc/authentication";
 import CustomScrollbars from "../components/CustomScrollbars";
 import { path } from "../utils";
-
 import Home from "../routes/Home";
-
 import Login from "./Auth/Login";
-
 import System from "../routes/System";
-
 import { CustomToastCloseButton } from "../components/CustomToast";
 import DetailDoctor from "./Patient/Doctor/DetailDoctor";
+import doctor from "../routes/doctor";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -39,7 +36,6 @@ class App extends Component {
   componentDidMount() {
     this.handlePersistorState();
   }
-
   render() {
     return (
       <Fragment>
@@ -59,6 +55,10 @@ class App extends Component {
                   />
                   <Route path={path.HOMEPAGE} component={HomePage} />
                   <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                  <Route
+                    path={"/doctor/"}
+                    component={userIsAuthenticated(doctor)}
+                  />
                 </Switch>
               </CustomScrollbars>
             </div>
