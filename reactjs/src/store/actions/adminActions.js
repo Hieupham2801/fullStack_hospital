@@ -206,12 +206,14 @@ export const fetchAllDoctor = () => {
   return async (dispatch) => {
     try {
       let res = await getAllDoctorServices();
+      console.log("check res", res);
       if (res && res.errCode === 0) {
         dispatch({
           type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
-          data: res.data,
+          dataDr: res.doctors,
         });
-      } else {
+      }
+       else {
         toast.error("fetch doctor failded");
         dispatch({
           type: actionTypes.FETCH_ALL_DOCTORS_FAILDED,

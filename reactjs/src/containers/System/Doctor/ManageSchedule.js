@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
+import { formatedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { LANGUAGES, dateFormat } from "../../../utils";
 import * as actions from "../../../store/actions";
@@ -9,6 +9,8 @@ import DatePicker from "../../../components/Input/DatePicker";
 import moment from "moment";
 import { toast } from "react-toastify";
 import _ from "lodash";
+import { bulkCreateSchedule } from "../../../services/userService";
+
 class ManageSchedule extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +31,7 @@ class ManageSchedule extends Component {
       this.setState({
         listDoctors: dataSelect,
       });
+      console.log("dataSelect:", dataSelect);
     }
     if (prevProps.language !== this.props.language) {
       let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
@@ -83,7 +86,7 @@ class ManageSchedule extends Component {
       });
     }
   };
-  handleSaveChange = () => {
+  handleSaveChange = async () => {
     let { rangeTime, currentDate, selectedDoctor } = this.state;
     let result = [];
     if (!currentDate) {
@@ -94,15 +97,16 @@ class ManageSchedule extends Component {
       toast.error("Invalid Selected !");
       return;
     }
-    let formattedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+    // let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+    let formatedDate = new Date(currentDate).getTime();
     if (rangeTime && rangeTime.length > 0) {
       let selectedTime = rangeTime.filter((item) => item.isSelected === true);
       if (selectedTime && selectedTime.length > 0) {
         selectedTime.map((item) => {
           let object = {};
           object.doctorId = selectedDoctor.value;
-          object.date = formattedDate;
-          object.time = item.keyMap;
+          object.date = formatedDate;
+          object.timeType = item.keyMap;
           result.push(object);
         });
       } else {
@@ -110,41 +114,51 @@ class ManageSchedule extends Component {
         return;
       }
     }
-    console.log("check result", result);
+    let res = await bulkCreateSchedule({
+      arrSchedule: result,
+      doctorId: selectedDoctor.value,
+      formatedDate: formatedDate,
+    });
+    if (res && res.errCode === 0) {
+      toast.success("Save info succeed");
+    } else {
+      toast.error("Save info fail");
+    }
   };
   render() {
     const { isLoggedIn, language } = this.props;
-    let { rangeTime } = this.state;
-    console.log("check state", this.state);
+    let { rangeTime, listDoctors } = this.state;
+
+    let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
     return (
       <div className="manage-schedule-container">
         <div className="manage-schedule-title">
           <h3>
-            <FormattedMessage id="manage-schedule.Title" />
+            <formattedMessage id="manage-schedule.Title" />
           </h3>
         </div>
         <div className="container">
           <div className="row">
             <div className="col-6 form-group">
               <label>
-                <FormattedMessage id="manage-schedule.Choose-doctor" />
+                <formattedMessage id="manage-schedule.Choose-doctor" />
               </label>
               <Select
                 value={this.state.selectedDoctor}
                 onChange={this.handleChange}
-                options={this.state.listDoctors}
+                options={listDoctors}
                 //   className="form-control"
               />
             </div>
             <div className="col-6 form-group">
               <label>
-                <FormattedMessage id="manage-schedule.Choose-day" />
+                <formattedMessage id="manage-schedule.Choose-day" />
               </label>
               <DatePicker
                 onChange={this.handleOnChangeDatePicker}
                 className="form-control"
                 value={this.state.currentDate}
-                minDate={new Date()}
+                minDate={yesterday}
               />
             </div>
             <div className="col-12 pick-hour-container">

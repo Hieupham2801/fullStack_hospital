@@ -83,15 +83,16 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    // fetch all doctor
     case actionTypes.FETCH_ALL_DOCTORS_SUCCESS:
-      state.allDoctors = action.data;
+      state.allDoctors = action.dataDr;
 
       return {
         ...state,
       };
     case actionTypes.FETCH_ALL_DOCTORS_FAILDED:
       state.allDoctors = [];
-      console.log("fire fetch top doctor start by action failded", action);
+      console.log("fire fetch all doctor start by action failded", action);
       return {
         ...state,
       };

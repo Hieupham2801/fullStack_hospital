@@ -6,6 +6,7 @@ import localization from "moment/locale/vi";
 import { LANGUAGES } from "../../../utils";
 import moment from "moment";
 import { getScheduleByDate } from "../../../services/userService";
+import "./DoctorSchedule.scss";
 class DoctorSchedule extends Component {
   constructor(props) {
     super(props);
@@ -16,14 +17,32 @@ class DoctorSchedule extends Component {
   }
   async componentDidMount() {
     let { language } = this.state;
-    this.setArrayday(language);
+    let allDays = await this.getArrayDay(language);
+
+    this.setState({
+      allDays: allDays,
+    });
   }
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  async componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.language !== prevProps.language) {
-      this.setArrayday(this.props.language);
+      let allDays = await this.getArrayDay(this.props.language);
+      this.setState({
+        allDays: allDays,
+      });
+    }
+    if (
+      this.props.DetailDoctorFromParent !== prevProps.DetailDoctorFromParent
+    ) {
+      let allDays = this.getArrayDay(this.props.language);
+      console.log("all days", allDays);
+      let res = await this.props.DetailDoctorFromParent;
+
+      this.setState({
+        aVailableTime: res.data ? res.data : [],
+      });
     }
   }
-  setArrayday = async (language) => {
+  getArrayDay = async (language) => {
     let allDays = [];
     for (let i = 0; i < 7; i++) {
       let obj = {};
@@ -39,10 +58,9 @@ class DoctorSchedule extends Component {
       obj.value = moment(new Date()).add(i, "days").startOf("day").valueOf();
       allDays.push(obj);
     }
+    console.log("check allday", allDays);
 
-    this.setState({
-      allDays: allDays,
-    });
+    return allDays;
   };
   handleChangeSelect = async (event) => {
     if (
@@ -96,7 +114,8 @@ class DoctorSchedule extends Component {
                   language === LANGUAGES.VI
                     ? item.timeTypeData.valueVi
                     : item.timeTypeData.valueEn;
-                return <button key={index}>{timeDisplay}</button>;
+                return <button key={index} 
+                className={ language === LANGUAGES.VI ?'btn-vi':'btn-en'} >{timeDisplay}</button>;
               })
             ) : (
               <div> no schedule in this time , please choose another time</div>
