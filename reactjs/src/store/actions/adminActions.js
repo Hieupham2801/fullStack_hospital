@@ -212,8 +212,7 @@ export const fetchAllDoctor = () => {
           type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
           dataDr: res.doctors,
         });
-      }
-       else {
+      } else {
         toast.error("fetch doctor failded");
         dispatch({
           type: actionTypes.FETCH_ALL_DOCTORS_FAILDED,
@@ -263,6 +262,43 @@ export const fetchAllScheduleTime = () => {
       }
     } catch (e) {
       toast.error("fetch time failded");
+    }
+  };
+};
+// fetch doctor price
+export const getRequireDoctorInfo = () => {
+  return async (dispatch) => {
+    try {
+      let resPrice = await GetAllCodeService("PRICE");
+      let resPayment = await GetAllCodeService("PAYMENT");
+      let resProvince = await GetAllCodeService("PROVINCE");
+      if (
+        resPrice &&
+        resPrice.errCode === 0 &&
+        resPayment &&
+        resPayment.errCode === 0 &&
+        resProvince &&
+        resProvince.errCode === 0
+      )
+      {
+        let dataRequire = {
+          resPrice: resPrice.data,
+          resPayment: resPayment.data,
+          resProvince: resProvince.data
+        }
+        dispatch({
+          type: actionTypes.FETCH_ALL_REQUIRE_DOCTOR_SUCCESS,
+          dataRequire
+        });
+      }
+       else {
+        toast.error("fetch all require doctor failded");
+        dispatch({
+          type: actionTypes.FETCH_ALL_REQUIRE_DOCTOR_FAILDED,
+        });
+      }
+    } catch (e) {
+      toast.error("fetch all require doctor failded");
     }
   };
 };

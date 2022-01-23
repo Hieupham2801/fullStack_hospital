@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./DoctorSchedule.scss";
 import "./DoctorDetail.scss";
 import localization from "moment/locale/vi";
 import { LANGUAGES } from "../../../utils";
 import moment from "moment";
+import BookingModal from "./Modal/BookingModal";
 import { getScheduleByDate } from "../../../services/userService";
 import "./DoctorSchedule.scss";
 class DoctorSchedule extends Component {
@@ -87,42 +87,56 @@ class DoctorSchedule extends Component {
     console.log("check language", language);
     let { allDays, aVailableTime } = this.state;
     return (
-      <div className="Doctor-schedule-container">
-        <div className="all-schedule">
-          <select onChange={(event) => this.handleChangeSelect(event)}>
-            {allDays &&
-              allDays.length > 0 &&
-              allDays.map((item, index) => {
-                return (
-                  <option key={index} value={item.value}>
-                    {item.label}
-                  </option>
-                );
-              })}
-          </select>
-        </div>
-        <div className="all-available">
-          <div className="text-calender">
-            <i className="fas fa-calendar-alt">
-              <span> Schedule</span>
-            </i>
+      <>
+        <div className="Doctor-schedule-container">
+          <div className="all-schedule">
+            <select onChange={(event) => this.handleChangeSelect(event)}>
+              {allDays &&
+                allDays.length > 0 &&
+                allDays.map((item, index) => {
+                  return (
+                    <option key={index} value={item.value}>
+                      {item.label}
+                    </option>
+                  );
+                })}
+            </select>
           </div>
-          <div className="time-content">
-            {aVailableTime && aVailableTime.length > 0 ? (
-              aVailableTime.map((item, index) => {
-                let timeDisplay =
-                  language === LANGUAGES.VI
-                    ? item.timeTypeData.valueVi
-                    : item.timeTypeData.valueEn;
-                return <button key={index} 
-                className={ language === LANGUAGES.VI ?'btn-vi':'btn-en'} >{timeDisplay}</button>;
-              })
-            ) : (
-              <div> no schedule in this time , please choose another time</div>
-            )}
+          <div className="all-available">
+            <div className="text-calender">
+              <i className="fas fa-calendar-alt">
+                <span> Schedule</span>
+              </i>
+            </div>
+            <div className="time-content">
+              {aVailableTime && aVailableTime.length > 0 ? (
+                aVailableTime.map((item, index) => {
+                  let timeDisplay =
+                    language === LANGUAGES.VI
+                      ? item.timeTypeData.valueVi
+                      : item.timeTypeData.valueEn;
+                  return (
+                    <button
+                      key={index}
+                      className={
+                        language === LANGUAGES.VI ? "btn-vi" : "btn-en"
+                      }
+                    >
+                      {timeDisplay}
+                    </button>
+                  );
+                })
+              ) : (
+                <div>
+                  {" "}
+                  no schedule in this time , please choose another time
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+        <BookingModal />
+      </>
     );
   }
 }

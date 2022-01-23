@@ -31,6 +31,20 @@
         "handbook": "Cẩm nang",
         "Outstanding-Health-facility": "Cơ sở y tế nổi bật"
     },
+    "manage-doctor": {
+        "Title": "THÊM MỚI THÔNG TIN BÁC SĨ",
+        "Choose-doctor": "Chọn bác sĩ",
+        "Info-introduce": "THÔNG TIN CÁ NHÂN",
+        "List-price": "BẢNG GIÁ",
+        "Create":"THÊM",
+        "Save":"LƯU",
+        "Payment-methods":"Phương thức thanh toán",
+        "Choose-city":"chọn tỉnh thành",
+        "Choose-price": "Chọn giá",
+        "Clinic-address": "Địa chỉ phòng khám",
+        "Note":"Ghi chú",
+        "Clinic-name":"Tên phòng khám"
+    },
     "manage-schedule": {
         "Title": "Quản lý lịch khám bệnh của bác sĩ",
         "Choose-doctor": "chọn bác sĩ",

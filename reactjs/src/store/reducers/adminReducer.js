@@ -9,6 +9,7 @@ const initialState = {
   topDoctors: [],
   allDoctors: [],
   allTime: [],
+  dataRequire: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -103,7 +104,24 @@ const adminReducer = (state = initialState, action) => {
       };
     case actionTypes.FETCH_ALL_CODE_SCHEDULE_HOURS_FAILDED:
       state.allTime = [];
-      console.log("fire fetch top doctor start by action failded", action);
+      console.log("fire fetch all schedule start by action failded", action);
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ALL_REQUIRE_DOCTOR_SUCCESS:
+      state.dataRequire = action.dataRequire;
+
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ALL_REQUIRE_DOCTOR_FAILDED:
+      state.dataPrice = [];
+      state.dataPayment = [];
+      state.dataProvince = [];
+      console.log(
+        "fire fetch all require doctor start by action failded",
+        action
+      );
       return {
         ...state,
       };

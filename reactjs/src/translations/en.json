@@ -30,12 +30,25 @@
         "handbook": "Hand book",
         "Outstanding-Health-facility": "Outstanding health facility"
     },
+    "manage-doctor": {
+        "Title": "ADD NEW INFORMATION DOCTOR",
+        "Choose-doctor": "CHOOSE DOCTOR",
+        "Info-introduce": "INFORMATION INTRODUCE",
+        "List-price": "LIST PRICE",
+        "Create": "CREATE",
+        "Save": "SAVE",
+        "Payment-methods": "payment methods",
+        "Choose-city": "Choose city",
+        "Choose-price": "Choose price",
+        "Clinic-address": "Clinic address",
+        "Note":"Note",
+        "Clinic-name":"Clinic name"
+    },
     "manage-schedule": {
         "Title": "Manage Doctor's schedule",
-        "Choose-doctor": "Choose Doctor",
+        "Choose-doctor": "Choose doctor",
         "Choose-day": "Choose day",
         "Save": "Save"
-
     },
     "menu": {
         "system": {
