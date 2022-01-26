@@ -40,9 +40,10 @@ const getScheduleByDate = (doctorId, date) => {
   );
 };
 const getExtraInforDr = (doctorId) => {
-  return axios.get(
-    `/api/get-extra-info-doctor-by-id?doctorId=${doctorId}`
-  );
+  return axios.get(`/api/get-extra-info-doctor-by-id?doctorId=${doctorId}`);
+};
+const getProfileDoctorById = (doctorId) => {
+  return axios.get(`api/get-profile-doctor-by-id?doctorId=${doctorId}`);
 };
 
 export {
@@ -59,4 +60,5 @@ export {
   bulkCreateSchedule,
   getScheduleByDate,
   getExtraInforDr,
+  getProfileDoctorById
 };

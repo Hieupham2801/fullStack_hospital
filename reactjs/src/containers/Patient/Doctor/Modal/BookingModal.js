@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import "./BookingModal.scss";
 import { Modal } from "reactstrap";
+import ProfileDoctor from "./profileDoctor";
+import _ from "lodash";
 class BookingModal extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +16,12 @@ class BookingModal extends React.Component {
   render() {
     let { isOpenModalBooking, closeBookingModal, dataModalSchedule } =
       this.props;
+    let doctorId = "";
+    if (dataModalSchedule && !_.isEmpty(dataModalSchedule)) {
+      doctorId = dataModalSchedule.doctorId;
+    }
+
+    console.log("check datatime ", dataModalSchedule);
     return (
       <Modal
         size="lg"
@@ -25,13 +33,15 @@ class BookingModal extends React.Component {
           <div className="booking-modal-header">
             <span className="left">Information booking schedule</span>
             <span className="right" onClick={closeBookingModal}>
-              <i class="fas fa-times"></i>
+              <i className="fas fa-times"></i>
             </span>
           </div>
           <div className="booking-modal-body container">
             {/* {JSON.stringify(dataModalSchedule)} */}
-            <div className="info-doctor"></div>
-            <div className="price">Price: 500.000 VND</div>
+            <div className="info-doctor">
+              <ProfileDoctor doctorId={doctorId} />
+            </div>
+
             <div className="row">
               <div className="col-6 form-group">
                 <label>Name</label>

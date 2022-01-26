@@ -18,8 +18,6 @@ class DoctorExtraInfo extends Component {
   async componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.GetDoctorIdFromDtDr !== prevProps.GetDoctorIdFromDtDr) {
       let res = await getExtraInforDr(this.props.GetDoctorIdFromDtDr);
-
-      console.log("get data", res);
       if (res && res.errCode === 0) {
         this.setState({
           extraInfo: res.data,
@@ -35,17 +33,16 @@ class DoctorExtraInfo extends Component {
   render() {
     let { isShowdetailInfo, extraInfo } = this.state;
     let { language } = this.props;
-    console.log("check info ", this.state);
+
     return (
       <div className="doctor-extra-info-container">
         <div className="content-up">
           <div className="text-address">Address Clinic</div>
           <div className="name-clinic">
-         
             {extraInfo && extraInfo.nameClinic ? extraInfo.nameClinic : ""}
           </div>
           <div className="detail-address">
-          <span> Địa chỉ phòng khám </span>
+            <span> Địa chỉ phòng khám </span>
             {extraInfo && extraInfo.addressClinic
               ? extraInfo.addressClinic
               : ""}
