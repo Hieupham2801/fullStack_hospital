@@ -13,6 +13,8 @@ class DoctorSchedule extends Component {
     this.state = {
       allDays: [],
       aVailableTime: [],
+      isOpenModalBooking: false,
+      dataModalSchedule:{}
     };
   }
   async componentDidMount() {
@@ -82,10 +84,22 @@ class DoctorSchedule extends Component {
   capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+  handleClickScheduleTime = (time) => {
+    
+    this.setState({
+      isOpenModalBooking: true,
+      dataModalSchedule: time
+    });
+  };
+  closeBookingModal = () => {
+    this.setState({
+      isOpenModalBooking: false,
+    });
+  };
   render() {
     let { language } = this.props;
     console.log("check language", language);
-    let { allDays, aVailableTime } = this.state;
+    let { allDays, aVailableTime, isOpenModalBooking,dataModalSchedule } = this.state;
     return (
       <>
         <div className="Doctor-schedule-container">
@@ -121,21 +135,23 @@ class DoctorSchedule extends Component {
                       className={
                         language === LANGUAGES.VI ? "btn-vi" : "btn-en"
                       }
+                      onClick={() => this.handleClickScheduleTime(item)}
                     >
                       {timeDisplay}
                     </button>
                   );
                 })
               ) : (
-                <div>
-                  {" "}
-                  no schedule in this time , please choose another time
-                </div>
+                <div>no schedule in this time , please choose another time</div>
               )}
             </div>
           </div>
         </div>
-        <BookingModal />
+        <BookingModal
+          isOpenModalBooking={isOpenModalBooking}
+          closeBookingModal={this.closeBookingModal}
+          dataModalSchedule={dataModalSchedule}
+        />
       </>
     );
   }
