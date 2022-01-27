@@ -39,7 +39,9 @@ class BookingModal extends React.Component {
           <div className="booking-modal-body container">
             {/* {JSON.stringify(dataModalSchedule)} */}
             <div className="info-doctor">
-              <ProfileDoctor doctorId={doctorId} />
+              <ProfileDoctor doctorId={doctorId} isShowDescription={false}
+              dataModalSchedule = {dataModalSchedule}
+               />
             </div>
 
             <div className="row">

@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./profileDoctor.scss";
+import localization from "moment/locale/vi";
 import { getProfileDoctorById } from "../../../../services/userService";
 import { LANGUAGES } from "../../../../utils";
 import NumberFormat from "react-number-format";
+import _ from "lodash";
+import moment from "moment";
 class ProfileDoctor extends Component {
   constructor(props) {
     super(props);
@@ -32,10 +35,37 @@ class ProfileDoctor extends Component {
     if (this.props.doctorId !== prevProps.doctorId) {
     }
   }
+  renderTimeBooking = (dataModalSchedule) => {
+    let language = this.props;
+    if (dataModalSchedule && !_.isEmpty(dataModalSchedule)) {
+      let time =
+        language === LANGUAGES.VI
+          ? dataModalSchedule.timeTypeData.valueVi
+          : dataModalSchedule.timeTypeData.valueEn;
+      let data =
+        language === LANGUAGES.VI
+          ? moment
+              .unix(+dataModalSchedule.date / 1000)
+              .locale("vi")
+              .format("dddd - DD/MM/YYYY")
+          : moment
+              .unix(+dataModalSchedule.date / 1000)
+              .locale("en")
+              .format("ddd - MM/DD/YYYY");
+      console.log("check data", data);
+      return (
+        <>
+          <div>
+            {time} {data}
+          </div>
+        </>
+      );
+    }
+  };
 
   render() {
     let { dataProfile } = this.state;
-    let { language } = this.props;
+    let { language, isShowDescription, dataModalSchedule } = this.props;
     let nameVi = "",
       nameEn = "";
     nameVi = ` ${dataProfile.lastName} ${dataProfile.firstName}`;
@@ -44,7 +74,7 @@ class ProfileDoctor extends Component {
       nameVi = `${dataProfile.positionData.valueVi},  ${dataProfile.lastName} ${dataProfile.firstName}`;
       nameEn = `${dataProfile.positionData.valueEn}, ${dataProfile.firstName} ${dataProfile.lastName}`;
     }
-    console.log("check data profile", dataProfile);
+    console.log("check data modal schedule", dataModalSchedule);
 
     return (
       <div className="profile-doctor-container">
@@ -57,9 +87,16 @@ class ProfileDoctor extends Component {
             <div className="up">
               {language === LANGUAGES.VI ? nameVi : nameEn}
             </div>
+
             <div className="down">
-              {dataProfile.Markdown && dataProfile.Markdown.description && (
-                <span>{dataProfile.Markdown.description}</span>
+              {isShowDescription === true ? (
+                <>
+                  {dataProfile.Markdown && dataProfile.Markdown.description && (
+                    <span>{dataProfile.Markdown.description}</span>
+                  )}
+                </>
+              ) : (
+                <>{this.renderTimeBooking(dataModalSchedule)}</>
               )}
             </div>
           </div>

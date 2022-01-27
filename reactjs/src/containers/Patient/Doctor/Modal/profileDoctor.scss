@@ -4,8 +4,9 @@
 
     .content-left {
       width: 20%;
-
-      background: center no-repeat no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       width: 120px;
       height: 120px;
       border-radius: 50%;
