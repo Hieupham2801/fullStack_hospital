@@ -52,7 +52,7 @@ class ProfileDoctor extends Component {
               .unix(+dataModalSchedule.date / 1000)
               .locale("en")
               .format("ddd - MM/DD/YYYY");
-      console.log("check data", data);
+   
       return (
         <>
           <div>
@@ -74,7 +74,7 @@ class ProfileDoctor extends Component {
       nameVi = `${dataProfile.positionData.valueVi},  ${dataProfile.lastName} ${dataProfile.firstName}`;
       nameEn = `${dataProfile.positionData.valueEn}, ${dataProfile.firstName} ${dataProfile.lastName}`;
     }
-    console.log("check data modal schedule", dataModalSchedule);
+    
 
     return (
       <div className="profile-doctor-container">

@@ -4,16 +4,116 @@ import "./BookingModal.scss";
 import { Modal } from "reactstrap";
 import ProfileDoctor from "./profileDoctor";
 import _ from "lodash";
+import { LANGUAGES } from "../../../../utils";
+import DatePicker from "../../../../components/Input/DatePicker";
+import * as actions from "../../../../store/actions";
+import Select from "react-select";
+import { postPatientBooking } from "../../../../services/userService";
+import { toast } from "react-toastify";
 class BookingModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      fullName: "",
+      phoneNumber: "",
+      email: "",
+      address: "",
+      reason: "",
+      genders: "",
+      birthDay: "",
+      doctorId: "",
+      timeType: "",
+      selectedGender: "",
+    };
   }
-
-  componentDidMount() {}
-  async componentDidUpdate(prevProps, prevState, snapshot) {}
+  // change input value state info patient
+  handleChangeInput = (event, id) => {
+    let valueInput = event.target.value;
+    let stateCoppy = { ...this.state };
+    stateCoppy[id] = valueInput;
+    this.setState({
+      ...stateCoppy,
+    });
+    console.log("check stateCopy: ", stateCoppy);
+  };
+  // change birthday of patient
+  handleOnChangeDatePicker = (date) => {
+    this.setState({
+      birthDay: date[0],
+    });
+  };
+  // build data suitable for reactSelect
+  buildDataGender = (data) => {
+    let result = [];
+    let language = this.props.language;
+    if (data && data.length > 0) {
+      data.map((item) => {
+        let obj = {};
+        obj.label = language === LANGUAGES.VI ? item.valueVi : item.valueEn;
+        obj.value = item.keyMap;
+        result.push(obj);
+      });
+    }
+    return result;
+  };
+  componentDidMount() {
+    this.props.fetchGenderStart();
+  }
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.langueage !== prevProps.langueage) {
+      this.setState({
+        genders: this.buildDataGender(this.props.genders),
+      });
+    }
+    if (this.props.genders !== prevProps.genders) {
+      this.setState({
+        genders: this.buildDataGender(this.props.genders),
+      });
+    }
+    let dataModalSchedule = this.props.dataModalSchedule;
+    if (dataModalSchedule !== prevProps.dataModalSchedule) {
+      if (dataModalSchedule && !_.isEmpty(dataModalSchedule)) {
+        let doctorId = dataModalSchedule.doctorId;
+        this.setState({
+          doctorId: doctorId,
+          timeType: dataModalSchedule.timeType,
+        });
+      }
+    }
+  }
+  // selected change sex
+  handleSelectedSex = (selectedOption) => {
+    this.setState({
+      selectedGender: selectedOption,
+    });
+  };
+  //event comfirm booking
+  handleConfirmBooking = async (data) => {
+    // valid input
+    let date = new Date(this.state.birthDay).getTime();
+    let res = await postPatientBooking({
+      fullName: this.state.fullName,
+      phoneNumber: this.state.phoneNumber,
+      email: this.state.email,
+      address: this.state.address,
+      reason: this.state.reason,
+      date: date,
+      selectedGender: this.state.selectedGender.value,
+      doctorId: this.state.doctorId,
+      timeType: this.state.timeType,
+    });
+    if (res && res.errCode === 0) {
+      toast.success("booking a appointment succeed");
+    } else {
+      toast.error("booking a appointment failded");
+    }
+    console.log("check confirm booking", this.state);
+  };
 
   render() {
+    console.log("check state: ", this.state);
+    let { fullName, phoneNumber, email, address, reason, genders, birthDay } =
+      this.state;
     let { isOpenModalBooking, closeBookingModal, dataModalSchedule } =
       this.props;
     let doctorId = "";
@@ -21,7 +121,6 @@ class BookingModal extends React.Component {
       doctorId = dataModalSchedule.doctorId;
     }
 
-    console.log("check datatime ", dataModalSchedule);
     return (
       <Modal
         size="lg"
@@ -39,44 +138,84 @@ class BookingModal extends React.Component {
           <div className="booking-modal-body container">
             {/* {JSON.stringify(dataModalSchedule)} */}
             <div className="info-doctor">
-              <ProfileDoctor doctorId={doctorId} isShowDescription={false}
-              dataModalSchedule = {dataModalSchedule}
-               />
+              <ProfileDoctor
+                doctorId={doctorId}
+                isShowDescription={false}
+                dataModalSchedule={dataModalSchedule}
+              />
             </div>
 
             <div className="row">
               <div className="col-6 form-group">
                 <label>Name</label>
-                <input className="form-control" />
+                <input
+                  className="form-control"
+                  value={fullName}
+                  onChange={(event) =>
+                    this.handleChangeInput(event, "fullName")
+                  }
+                />
               </div>
               <div className="col-6 form-group">
                 <label>Phone Number</label>
-                <input className="form-control" />
+                <input
+                  className="form-control"
+                  value={phoneNumber}
+                  onChange={(event) =>
+                    this.handleChangeInput(event, "phoneNumber")
+                  }
+                />
               </div>
               <div className="col-6 form-group">
                 <label>Email: </label>
-                <input className="form-control" />
+                <input
+                  className="form-control"
+                  value={email}
+                  onChange={(event) => this.handleChangeInput(event, "email")}
+                />
               </div>
               <div className="col-6 form-group">
                 <label>Address: </label>
-                <input className="form-control" />
+                <input
+                  className="form-control"
+                  value={address}
+                  onChange={(event) => this.handleChangeInput(event, "address")}
+                />
               </div>
               <div className="col-6 form-group">
                 <label>Gender</label>
-                <input className="form-control" />
+                <Select
+                  value={this.state.selectedGender}
+                  onChange={this.handleSelectedSex}
+                  options={genders}
+                  name="selectedGender"
+                />
               </div>
               <div className="col-6 form-group">
-                <label> who to book an appointment for?</label>
-                <input className="form-control" />
+                <label>Date of birth</label>
+                <DatePicker
+                  onChange={this.handleOnChangeDatePicker}
+                  className="form-control"
+                  value={birthDay}
+                />
               </div>
               <div className="col-12 form-group">
                 <label>Reason: </label>
-                <input className="form-control" />
+                <input
+                  className="form-control"
+                  value={reason}
+                  onChange={(event) => this.handleChangeInput(event, "reason")}
+                />
               </div>
             </div>
           </div>
           <div className="booking-modal-footer">
-            <button className="btn-booking-confirm">Confirm</button>
+            <button
+              className="btn-booking-confirm"
+              onClick={() => this.handleConfirmBooking()}
+            >
+              Confirm
+            </button>
             <button className="btn-booking-cancel" onClick={closeBookingModal}>
               Cancel
             </button>
@@ -88,11 +227,16 @@ class BookingModal extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    genders: state.admin.genders,
+    language: state.app.language,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    fetchGenderStart: () => dispatch(actions.fetchGenderStart()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookingModal);

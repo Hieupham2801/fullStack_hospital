@@ -7,7 +7,7 @@ const getAllUser = (inputId) => {
   return axios.get(`/api/get-all-users?id=${inputId}`);
 };
 const CreateNewUserService = (data) => {
-  console.log("check data from services", data);
+
   return axios.post("/api/create-new-users", data);
 };
 const DeleteUserService = (userId) => {
@@ -45,6 +45,10 @@ const getExtraInforDr = (doctorId) => {
 const getProfileDoctorById = (doctorId) => {
   return axios.get(`api/get-profile-doctor-by-id?doctorId=${doctorId}`);
 };
+const postPatientBooking = (data) => {
+  return axios.post("/api/patient-book-appointment", data);
+};
+
 
 export {
   handleLoginApi,
@@ -60,5 +64,6 @@ export {
   bulkCreateSchedule,
   getScheduleByDate,
   getExtraInforDr,
-  getProfileDoctorById
+  getProfileDoctorById,
+  postPatientBooking
 };

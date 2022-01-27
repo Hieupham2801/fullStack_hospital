@@ -16,7 +16,6 @@ const adminReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_GENDER_START:
       state.isLoadingGender = true;
-      console.log("fire fetch gender start by action start", action);
       return {
         ...state,
       };

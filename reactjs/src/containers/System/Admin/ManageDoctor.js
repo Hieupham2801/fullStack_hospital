@@ -69,7 +69,7 @@ class ManageDoctor extends Component {
       });
     }
     if (prevProps.dataRequire != this.props.dataRequire) {
-      console.log("check dataRequire", this.props.dataRequire);
+     
       let { resPayment, resPrice, resProvince } = this.props.dataRequire;
       let dataSelectPrice = this.buildDataInputSelect(resPrice, "PRICE");
       let dataSelectProvince = this.buildDataInputSelect(
