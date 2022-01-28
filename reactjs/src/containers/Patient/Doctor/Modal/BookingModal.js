@@ -10,6 +10,7 @@ import * as actions from "../../../../store/actions";
 import Select from "react-select";
 import { postPatientBooking } from "../../../../services/userService";
 import { toast } from "react-toastify";
+import moment from "moment";
 class BookingModal extends React.Component {
   constructor(props) {
     super(props);
@@ -56,11 +57,26 @@ class BookingModal extends React.Component {
     }
     return result;
   };
+  buildDoctorName = (dataModalSchedule) => {
+    let { language } = this.props;
+    if (dataModalSchedule && !_.isEmpty(dataModalSchedule)) {
+      let lastName = dataModalSchedule.doctorData.lastName;
+      let firstName = dataModalSchedule.doctorData.firstName;
+      let fullName =
+        language === LANGUAGES.VI
+          ? `${lastName} ${firstName}`
+          : `${firstName} ${lastName}`;
+      console.log("check data doctor name", dataModalSchedule);
+      console.log("check data full name", fullName);
+      return fullName;
+    }
+    return "";
+  };
   componentDidMount() {
     this.props.fetchGenderStart();
   }
   async componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.langueage !== prevProps.langueage) {
+    if (this.props.language !== prevProps.language) {
       this.setState({
         genders: this.buildDataGender(this.props.genders),
       });
@@ -90,6 +106,13 @@ class BookingModal extends React.Component {
   //event comfirm booking
   handleConfirmBooking = async (data) => {
     // valid input
+    let timeString = this.buildDataTimeBooking(this.props.dataModalSchedule);
+    let doctorName = this.buildDoctorName(this.props.dataModalSchedule);
+    console.log(
+      "check full name",
+      this.buildDoctorName(this.props.dataModalSchedule)
+    );
+    let language = this.props.language;
     let date = new Date(this.state.birthDay).getTime();
     let res = await postPatientBooking({
       fullName: this.state.fullName,
@@ -101,6 +124,9 @@ class BookingModal extends React.Component {
       selectedGender: this.state.selectedGender.value,
       doctorId: this.state.doctorId,
       timeType: this.state.timeType,
+      timeString: timeString,
+      doctorName: doctorName,
+      language: language,
     });
     if (res && res.errCode === 0) {
       toast.success("booking a appointment succeed");
@@ -109,17 +135,41 @@ class BookingModal extends React.Component {
     }
     console.log("check confirm booking", this.state);
   };
+  // render timebooking
+  buildDataTimeBooking = (dataModalSchedule) => {
+    let language = this.props;
+    if (dataModalSchedule && !_.isEmpty(dataModalSchedule)) {
+      let time =
+        language === LANGUAGES.VI
+          ? dataModalSchedule.timeTypeData.valueVi
+          : dataModalSchedule.timeTypeData.valueEn;
+      let data =
+        language === LANGUAGES.VI
+          ? moment
+              .unix(+dataModalSchedule.date / 1000)
+              .locale("vi")
+              .format("dddd - DD/MM/YYYY")
+          : moment
+              .unix(+dataModalSchedule.date / 1000)
+              .locale("en")
+              .format("ddd - MM/DD/YYYY");
 
+      return ` ${time} ${data}`;
+    }
+    return "";
+  };
   render() {
     console.log("check state: ", this.state);
     let { fullName, phoneNumber, email, address, reason, genders, birthDay } =
       this.state;
-    let { isOpenModalBooking, closeBookingModal, dataModalSchedule } =
+    let { isOpenModalBooking, closeBookingModal, dataModalSchedule, language } =
       this.props;
+    console.log("check language", this.props.language);
     let doctorId = "";
     if (dataModalSchedule && !_.isEmpty(dataModalSchedule)) {
       doctorId = dataModalSchedule.doctorId;
     }
+    console.log("check dataModalSchedule : ", dataModalSchedule);
 
     return (
       <Modal
