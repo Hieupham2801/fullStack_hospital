@@ -1,5 +1,4 @@
 import axios from "../axios";
-
 const handleLoginApi = (email, password) => {
   return axios.post("api/login", { email, password });
 };
@@ -7,7 +6,6 @@ const getAllUser = (inputId) => {
   return axios.get(`/api/get-all-users?id=${inputId}`);
 };
 const CreateNewUserService = (data) => {
-
   return axios.post("/api/create-new-users", data);
 };
 const DeleteUserService = (userId) => {
@@ -48,7 +46,9 @@ const getProfileDoctorById = (doctorId) => {
 const postPatientBooking = (data) => {
   return axios.post("/api/patient-book-appointment", data);
 };
-
+const postVerifyEmail = (data) => {
+  return axios.post("/api/verify-book-appointment", data);
+};
 
 export {
   handleLoginApi,
@@ -65,5 +65,6 @@ export {
   getScheduleByDate,
   getExtraInforDr,
   getProfileDoctorById,
-  postPatientBooking
+  postPatientBooking,
+  postVerifyEmail,
 };
