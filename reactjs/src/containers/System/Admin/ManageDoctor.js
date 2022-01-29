@@ -69,7 +69,6 @@ class ManageDoctor extends Component {
       });
     }
     if (prevProps.dataRequire != this.props.dataRequire) {
-     
       let { resPayment, resPrice, resProvince } = this.props.dataRequire;
       let dataSelectPrice = this.buildDataInputSelect(resPrice, "PRICE");
       let dataSelectProvince = this.buildDataInputSelect(
@@ -110,7 +109,7 @@ class ManageDoctor extends Component {
     this.setState({ selectedOption });
     let { listDoctors, listPrices, listPayMent, listProvince } = this.state;
     let res = await getDetailInforDoctor(selectedOption.value);
-    console.log("check res", res);
+
     if (res && res.errCode === 0 && res.data && res.data.Markdown) {
       let markdown = res.data.Markdown;
       let nameClinic = "",

@@ -187,7 +187,7 @@ export const fetchTopDoctor = () => {
   return async (dispatch) => {
     try {
       let res = await getTopDoctorService("");
-      console.log("check res", res);
+
       if (res && res.errCode === 0) {
         dispatch({
           type: actionTypes.FETCH_TOP_DOCTOR_SUCCESS,
@@ -206,7 +206,7 @@ export const fetchAllDoctor = () => {
   return async (dispatch) => {
     try {
       let res = await getAllDoctorServices();
-      console.log("check res", res);
+
       if (res && res.errCode === 0) {
         dispatch({
           type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
@@ -279,19 +279,17 @@ export const getRequireDoctorInfo = () => {
         resPayment.errCode === 0 &&
         resProvince &&
         resProvince.errCode === 0
-      )
-      {
+      ) {
         let dataRequire = {
           resPrice: resPrice.data,
           resPayment: resPayment.data,
-          resProvince: resProvince.data
-        }
+          resProvince: resProvince.data,
+        };
         dispatch({
           type: actionTypes.FETCH_ALL_REQUIRE_DOCTOR_SUCCESS,
-          dataRequire
+          dataRequire,
         });
-      }
-       else {
+      } else {
         toast.error("fetch all require doctor failded");
         dispatch({
           type: actionTypes.FETCH_ALL_REQUIRE_DOCTOR_FAILDED,
