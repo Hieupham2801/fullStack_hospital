@@ -14,15 +14,20 @@ class DoctorExtraInfo extends Component {
     };
   }
 
-  componentDidMount() {}
+  async componentDidMount() {
+    let res = await getExtraInforDr(this.props.GetDoctorIdFromDtDr);
+    if (res && res.errCode === 0) {
+      this.setState({
+        extraInfo: res.data,
+      });
+    }
+  }
   async componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.GetDoctorIdFromDtDr !== prevProps.GetDoctorIdFromDtDr) {
-      let res = await getExtraInforDr(this.props.GetDoctorIdFromDtDr);
-      if (res && res.errCode === 0) {
-        this.setState({
-          extraInfo: res.data,
-        });
-      }
+    let res = await getExtraInforDr(this.props.GetDoctorIdFromDtDr);
+    if (res && res.errCode === 0) {
+      this.setState({
+        extraInfo: res.data,
+      });
     }
   }
   showHideDetaiInfo = (status) => {
