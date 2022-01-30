@@ -8,6 +8,7 @@ import {
   getTopDoctorService,
   getAllDoctorServices,
   saveInforDoctorsServices,
+  getAllSpecialty,
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -240,6 +241,7 @@ export const saveInforDoctor = (data) => {
         });
       }
     } catch (e) {
+      console.log("check err", e);
       toast.error("Save infor doctor failded");
     }
   };
@@ -272,18 +274,22 @@ export const getRequireDoctorInfo = () => {
       let resPrice = await GetAllCodeService("PRICE");
       let resPayment = await GetAllCodeService("PAYMENT");
       let resProvince = await GetAllCodeService("PROVINCE");
+      let resSpecialty = await getAllSpecialty();
+      // let resClinic = await getAllSpecialty();
       if (
         resPrice &&
         resPrice.errCode === 0 &&
         resPayment &&
         resPayment.errCode === 0 &&
         resProvince &&
-        resProvince.errCode === 0
+        resProvince.errCode === 0 &&
+        resSpecialty.errCode === 0
       ) {
         let dataRequire = {
           resPrice: resPrice.data,
           resPayment: resPayment.data,
           resProvince: resProvince.data,
+          resSpecialty: resSpecialty.data,
         };
         dispatch({
           type: actionTypes.FETCH_ALL_REQUIRE_DOCTOR_SUCCESS,

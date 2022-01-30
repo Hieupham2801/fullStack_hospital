@@ -41,8 +41,10 @@
         "Choose-city": "Choose city",
         "Choose-price": "Choose price",
         "Clinic-address": "Clinic address",
-        "Note":"Note",
-        "Clinic-name":"Clinic name"
+        "Choose-specialty": "Choose specialty",
+        "Choose-clinic": "Choose clinic",
+        "Note": "Note",
+        "Clinic-name": "Clinic name"
     },
     "manage-schedule": {
         "Title": "Manage Doctor's schedule",

@@ -19,6 +19,7 @@ import {
   doctor,
   verifyEmail,
 } from "./pathComponent";
+import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
 class App extends Component {
   handlePersistorState = () => {
     const { persistor } = this.props;
@@ -63,6 +64,16 @@ class App extends Component {
                   <Route
                     path={path.VERIFY_EMAIL_BOOKING}
                     component={verifyEmail}
+                  />
+
+                  <Route
+                    path={path.VERIFY_EMAIL_BOOKING}
+                    component={verifyEmail}
+                  />
+
+                  <Route
+                    path={path.DETAIL_SPECIALTY}
+                    component={DetailSpecialty}
                   />
                 </Switch>
               </CustomScrollbars>

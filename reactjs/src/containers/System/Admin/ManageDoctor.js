@@ -26,6 +26,8 @@ class ManageDoctor extends Component {
       listPrices: [],
       listPayMent: [],
       listProvince: [],
+      listClinic: [],
+      listSpecialty: [],
 
       selectedPrices: "",
       selectedPayment: "",
@@ -33,6 +35,11 @@ class ManageDoctor extends Component {
       nameClinic: "",
       addressClinic: "",
       note: "",
+
+      clinicId: "",
+      specialtyId: "",
+      selectedSpecialty: "",
+      selectedClinic: "",
     };
   }
   componentDidMount() {
@@ -51,16 +58,18 @@ class ManageDoctor extends Component {
     }
     if (prevProps.language != this.props.language) {
       let dataSelect = this.buildDataInputSelect(
-        this.props.allDoctorsa,
+        this.props.allDoctors,
         "USERS"
       );
-      let { resPayment, resPrice, resProvince } = this.props.dataRequire;
+      let { resPayment, resPrice, resProvince, resSpecialty } =
+        this.props.dataRequire;
       let dataSelectPrice = this.buildDataInputSelect(resPrice, "PRICE");
       let dataSelectProvince = this.buildDataInputSelect(
         resProvince,
         "PAYMENT"
       );
       let dataSelectPayment = this.buildDataInputSelect(resPayment, "PROVINCE");
+
       this.setState({
         listDoctors: dataSelect,
         listPayMent: dataSelectPayment,
@@ -69,17 +78,23 @@ class ManageDoctor extends Component {
       });
     }
     if (prevProps.dataRequire != this.props.dataRequire) {
-      let { resPayment, resPrice, resProvince } = this.props.dataRequire;
+      let { resPayment, resPrice, resProvince, resSpecialty } =
+        this.props.dataRequire;
       let dataSelectPrice = this.buildDataInputSelect(resPrice, "PRICE");
       let dataSelectProvince = this.buildDataInputSelect(
         resProvince,
         "PAYMENT"
       );
       let dataSelectPayment = this.buildDataInputSelect(resPayment, "PROVINCE");
+      let dataSelectSpecialty = this.buildDataInputSelect(
+        resSpecialty,
+        "SPECIALTY"
+      );
       this.setState({
         listPayMent: dataSelectPayment,
         listPrices: dataSelectPrice,
         listProvince: dataSelectProvince,
+        listSpecialty: dataSelectSpecialty,
       });
     }
   }
@@ -103,6 +118,10 @@ class ManageDoctor extends Component {
       nameClinic: this.state.nameClinic,
       addressClinic: this.state.addressClinic,
       note: this.state.note,
+      clinicId: this.state.selectedClinic
+        ? this.state.selectedClinic.value
+        : "",
+      specialtyId: this.state.selectedSpecialty.value,
     });
   };
   handleChange = async (selectedOption) => {
@@ -201,6 +220,14 @@ class ManageDoctor extends Component {
           result.push(object);
         });
       }
+      if (type === "SPECIALTY") {
+        inputData.map((item) => {
+          let object = {};
+          object.label = item.name;
+          object.value = item.id;
+          result.push(object);
+        });
+      }
     }
     return result;
   };
@@ -214,10 +241,17 @@ class ManageDoctor extends Component {
     console.log("check new select", selectedOption, stateCopy);
   };
   render() {
-    let { selectedOption, hasOldData, listPayMent, listPrices, listProvince } =
-      this.state;
-    console.log("check state", this.state);
-
+    let {
+      selectedOption,
+      hasOldData,
+      listPayMent,
+      listSpecialty,
+      listPrices,
+      listProvince,
+      listClinic,
+    } = this.state;
+    console.log("check state", this.state.listSpecialty);
+    console.log("check data require", this.props.dataRequire);
     return (
       <div className="manage-doctor-container">
         <div className="manage-doctor-title">
@@ -322,10 +356,44 @@ class ManageDoctor extends Component {
             />
           </div>
         </div>
+
+        <div className="row">
+          <div className="col-4 form-group">
+            <label>
+              <FormattedMessage id="manage-doctor.Choose-specialty" />
+            </label>
+            <Select
+              placeholder={
+                <FormattedMessage id="manage-doctor.Choose-specialty" />
+              }
+              // value={this.state.selectedPrices}
+              // onChange={this.handleChangeSelectedDoctorRequire}
+              options={listSpecialty}
+              // name="selectedPrices"
+              //   className="form-control"
+            />
+          </div>
+
+          <div className="col-4 form-group">
+            <label>
+              <FormattedMessage id="manage-doctor.Choose-clinic" />
+            </label>
+            <Select
+              placeholder={
+                <FormattedMessage id="manage-doctor.Choose-specialty" />
+              }
+              // value={this.state.selectedPrices}
+              // onChange={this.handleChangeSelectedDoctorRequire}
+              options={listClinic}
+              // name="selectedPrices"
+              //   className="form-control"
+            />
+          </div>
+        </div>
         <div className="manage-doctor-editor">
           <MdEditor
             value={this.state.contentMarkDown}
-            style={{ height: "500px" }}
+            style={{ height: "300px" }}
             renderHTML={(text) => mdParser.render(text)}
             onChange={this.handleEditorChange}
           />
