@@ -55,6 +55,11 @@ const createNewSpecialty = (data) => {
 const getAllSpecialty = () => {
   return axios.get("/api/get-all-info-specialty");
 };
+const getDetailSpecialtyById = (data) => {
+  return axios.get(
+    `/api/get-detail-info-specialty-by-id?id=${data.id}&location=${data.location}`
+  );
+};
 
 export {
   handleLoginApi,
@@ -75,4 +80,5 @@ export {
   postVerifyEmail,
   createNewSpecialty,
   getAllSpecialty,
+  getDetailSpecialtyById,
 };

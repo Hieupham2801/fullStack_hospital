@@ -35,7 +35,6 @@ class BookingModal extends React.Component {
     this.setState({
       ...stateCoppy,
     });
-    console.log("check stateCopy: ", stateCoppy);
   };
   // change birthday of patient
   handleOnChangeDatePicker = (date) => {
@@ -66,8 +65,7 @@ class BookingModal extends React.Component {
         language === LANGUAGES.VI
           ? `${lastName} ${firstName}`
           : `${firstName} ${lastName}`;
-      console.log("check data doctor name", dataModalSchedule);
-      console.log("check data full name", fullName);
+
       return fullName;
     }
     return "";
@@ -159,17 +157,15 @@ class BookingModal extends React.Component {
     return "";
   };
   render() {
-    console.log("check state: ", this.state);
     let { fullName, phoneNumber, email, address, reason, genders, birthDay } =
       this.state;
     let { isOpenModalBooking, closeBookingModal, dataModalSchedule, language } =
       this.props;
-    console.log("check language", this.props.language);
+
     let doctorId = "";
     if (dataModalSchedule && !_.isEmpty(dataModalSchedule)) {
       doctorId = dataModalSchedule.doctorId;
     }
-    console.log("check dataModalSchedule : ", dataModalSchedule);
 
     return (
       <Modal
