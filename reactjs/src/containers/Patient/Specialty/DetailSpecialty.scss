@@ -1,10 +1,22 @@
 .detail-specialty-container {
   .detail-sp-body {
-    margin: 0 100px;
+    padding: 0 100px;
+    background-color: #eeeeee;
+    display: flex;
+    flex-direction: column;
     .description-sp {
-      border: 1px solid red;
+      background-color: #d6d5d4 !important;
+      padding: 15px;
+      margin: 15px 0;
     }
     .search-sp-doctor {
+      select {
+        height: 30px;
+        padding: 5px 8px;
+        border: none;
+        outline: none;
+        border-radius: 3px;
+      }
     }
     .each-doctor {
       display: flex;
@@ -20,6 +32,7 @@
       }
       .dt-content-right {
         width: 50%;
+        border-left: 1px solid grey;
 
         padding: 10px;
         .doctor-schedule {

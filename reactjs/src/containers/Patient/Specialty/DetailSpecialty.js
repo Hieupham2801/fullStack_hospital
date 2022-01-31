@@ -49,18 +49,52 @@ class detailSpecialty extends Component {
             arr.map((item) => arrDoctorId.push(item.doctorId));
           }
         }
+        let dataProvince = resProvince.data;
+        if (dataProvince && dataProvince.length > 0) {
+          dataProvince.unshift({
+            keyMap: "ALL",
+            type: "PROVINCE",
+            valueEn: "ALL",
+            valueVi: "Toàn quốc",
+          });
+        }
         this.setState({
           dataDetailSpecialty: data,
           arrDoctorId: arrDoctorId,
-          listProvince: resProvince.data,
+          listProvince: dataProvince ? dataProvince : [],
         });
       }
     }
   }
   async componentDidUpdate(prevProps, prevState, snapshot) {}
 
-  handleSearchLocation = (event) => {
-    console.log("check event", event.target.value);
+  handleSearchLocation = async (event) => {
+    if (
+      this.props.match &&
+      this.props.match.params &&
+      this.props.match.params.id
+    ) {
+      let location = event.target.value;
+      let id = this.props.match.params.id;
+      let res = await getDetailSpecialtyById({
+        id: id,
+        location: location,
+      });
+      if (res && res.errCode === 0) {
+        let data = res.data;
+        let arrDoctorId = [];
+        if (data && !_.isEmpty(res.data)) {
+          let arr = data.doctorSpecialty;
+          if (arr && arr.length > 0) {
+            arr.map((item) => arrDoctorId.push(item.doctorId));
+          }
+        }
+        this.setState({
+          dataDetailSpecialty: data,
+          arrDoctorId: arrDoctorId,
+        });
+      }
+    }
   };
   render() {
     let { arrDoctorId, dataDetailSpecialty, listProvince } = this.state;
@@ -101,7 +135,12 @@ class detailSpecialty extends Component {
                 <div className="each-doctor" key={index}>
                   <div className="dt-content-left">
                     <div className="profile-doctor">
-                      <ProfileDoctor doctorId={item} isShowDescription={true} />
+                      <ProfileDoctor
+                        doctorId={item}
+                        isShowDescription={true}
+                        isShowLinkDetail={true}
+                        // isShowPrice={false}
+                      />
                     </div>
                   </div>
                   <div className="dt-content-right">

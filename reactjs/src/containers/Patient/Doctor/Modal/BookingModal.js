@@ -188,6 +188,8 @@ class BookingModal extends React.Component {
                 doctorId={doctorId}
                 isShowDescription={false}
                 dataModalSchedule={dataModalSchedule}
+                isShowLinkDetail={false}
+                isShowPrice={true}
               />
             </div>
 

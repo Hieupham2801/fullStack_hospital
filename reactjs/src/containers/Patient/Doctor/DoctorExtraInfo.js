@@ -44,10 +44,11 @@ class DoctorExtraInfo extends Component {
         <div className="content-up">
           <div className="text-address">Address Clinic</div>
           <div className="name-clinic">
+            <span>Tên phòng khám: </span>
             {extraInfo && extraInfo.nameClinic ? extraInfo.nameClinic : ""}
           </div>
           <div className="detail-address">
-            <span> Địa chỉ phòng khám </span>
+            <span> Địa chỉ phòng khám: </span>
             {extraInfo && extraInfo.addressClinic
               ? extraInfo.addressClinic
               : ""}
