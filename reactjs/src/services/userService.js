@@ -49,6 +49,7 @@ const postPatientBooking = (data) => {
 const postVerifyEmail = (data) => {
   return axios.post("/api/verify-book-appointment", data);
 };
+//specialty
 const createNewSpecialty = (data) => {
   return axios.post("/api/create-new-specialty", data);
 };
@@ -59,6 +60,10 @@ const getDetailSpecialtyById = (data) => {
   return axios.get(
     `/api/get-detail-info-specialty-by-id?id=${data.id}&location=${data.location}`
   );
+};
+//clinic
+const createNewClinic = (data) => {
+  return axios.post("/api/create-new-clinic", data);
 };
 
 export {
@@ -81,4 +86,5 @@ export {
   createNewSpecialty,
   getAllSpecialty,
   getDetailSpecialtyById,
+  createNewClinic,
 };

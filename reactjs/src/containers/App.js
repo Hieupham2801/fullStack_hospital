@@ -19,6 +19,7 @@ import {
   doctor,
   verifyEmail,
 } from "./pathComponent";
+import manageClinic from "./System/Clinic/manageClinic";
 import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
 class App extends Component {
   handlePersistorState = () => {
@@ -65,12 +66,10 @@ class App extends Component {
                     path={path.VERIFY_EMAIL_BOOKING}
                     component={verifyEmail}
                   />
-
                   <Route
                     path={path.VERIFY_EMAIL_BOOKING}
                     component={verifyEmail}
                   />
-
                   <Route
                     path={path.DETAIL_SPECIALTY}
                     component={DetailSpecialty}

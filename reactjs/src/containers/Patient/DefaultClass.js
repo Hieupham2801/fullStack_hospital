@@ -11,7 +11,9 @@ class DefaultClass extends Component {
   componentDidMount() {}
   async componentDidUpdate(prevProps, prevState, snapshot) {}
 
-  render() {}
+  render() {
+    return <div></div>;
+  }
 }
 
 const mapStateToProps = (state) => {
