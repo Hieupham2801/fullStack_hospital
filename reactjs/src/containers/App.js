@@ -19,7 +19,7 @@ import {
   doctor,
   verifyEmail,
 } from "./pathComponent";
-import manageClinic from "./System/Clinic/manageClinic";
+import DetailClinic from "./Patient/Clinic/DetailClinic";
 import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
 class App extends Component {
   handlePersistorState = () => {
@@ -74,6 +74,8 @@ class App extends Component {
                     path={path.DETAIL_SPECIALTY}
                     component={DetailSpecialty}
                   />
+
+                  <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
                 </Switch>
               </CustomScrollbars>
             </div>
