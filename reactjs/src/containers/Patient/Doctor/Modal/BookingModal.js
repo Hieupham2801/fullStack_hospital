@@ -102,23 +102,22 @@ class BookingModal extends React.Component {
     });
   };
   //event comfirm booking
-  handleConfirmBooking = async (data) => {
+  handleConfirmBooking = async () => {
     // valid input
     let timeString = this.buildDataTimeBooking(this.props.dataModalSchedule);
     let doctorName = this.buildDoctorName(this.props.dataModalSchedule);
-    console.log(
-      "check full name",
-      this.buildDoctorName(this.props.dataModalSchedule)
-    );
+
     let language = this.props.language;
     let date = new Date(this.state.birthDay).getTime();
+    console.log(typeof this.props.dataModalSchedule.date);
     let res = await postPatientBooking({
       fullName: this.state.fullName,
       phoneNumber: this.state.phoneNumber,
       email: this.state.email,
       address: this.state.address,
       reason: this.state.reason,
-      date: date,
+      date: this.props.dataModalSchedule.date,
+      birthDay: date,
       selectedGender: this.state.selectedGender.value,
       doctorId: this.state.doctorId,
       timeType: this.state.timeType,
