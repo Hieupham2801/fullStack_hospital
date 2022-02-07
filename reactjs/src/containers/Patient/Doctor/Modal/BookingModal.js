@@ -109,7 +109,8 @@ class BookingModal extends React.Component {
 
     let language = this.props.language;
     let date = new Date(this.state.birthDay).getTime();
-    console.log(typeof this.props.dataModalSchedule.date);
+    console.log("check state", this.state.selectedGender);
+    console.log("check props", this.props.dataModalSchedule);
     let res = await postPatientBooking({
       fullName: this.state.fullName,
       phoneNumber: this.state.phoneNumber,

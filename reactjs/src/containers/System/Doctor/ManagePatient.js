@@ -28,6 +28,7 @@ class ManagePatient extends Component {
       doctorId: user.id,
       date: formatedDate,
     });
+    console.log("check res", res.data);
     if (res && res.errCode === 0) {
       this.setState({
         dataPatient: res.data,
@@ -41,6 +42,13 @@ class ManagePatient extends Component {
   };
 
   async componentDidUpdate(prevProps, prevState, snapshot) {}
+  handleConfirm = (item) => {
+    let data = {
+      doctorId: item.doctorId,
+      patientId: item.patientId,
+      email: item.patientData.email,
+    };
+  };
 
   render() {
     let { currentDate, dataPatient } = this.state;
@@ -71,17 +79,22 @@ class ManagePatient extends Component {
               {dataPatient &&
                 dataPatient.length > 0 &&
                 dataPatient.map((item, index) => {
+                  let time =
+                    language === LANGUAGES.VI
+                      ? item.timeTypeDataPatient.valueVi
+                      : item.timeTypeDataPatient.valueEn;
+                  // let gender =
+                  //   language === LANGUAGES.VI
+                  //     ? item.patientData.genderData.valueVi
+                  //     : item.patientData.genderData.valueEn;
                   return (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      <td>
-                        {language === LANGUAGES.VI
-                          ? item.timeTypeDataPatient.valueVi
-                          : item.timeTypeDataPatient.valueEn}
-                      </td>
+                      <td>{time}</td>
                       <td>{item.patientData.firstName}</td>
                       <td>{item.patientData.address}</td>
-                      <td>{item.patientData.genderData}</td>
+                      <td></td>
+                      {/* <td>{gender}</td> */}
                       <td>
                         <button
                           className="btn btn-primary px-2 mx-2"
@@ -91,7 +104,7 @@ class ManagePatient extends Component {
                         </button>
                         <button
                           className="btn btn-secondary px-2"
-                          onClick={() => this.handleSend()}
+                          onClick={() => this.handleSend(item)}
                         >
                           Send
                         </button>

@@ -9,7 +9,7 @@ class DefaultClass extends Component {
   }
 
   componentDidMount() {}
-  async componentDidUpdate(prevProps, prevState, snapshot) {}
+  componentDidUpdate(prevProps, prevState, snapshot) {}
 
   render() {
     return <div></div>;

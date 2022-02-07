@@ -114,6 +114,7 @@ class UserRedux extends Component {
   };
   onChangeInput = (event, id) => {
     let copyState = { ...this.state };
+    console.log("check event", event.target.value);
     copyState[id] = event.target.value;
     this.setState({
       ...copyState,
@@ -211,6 +212,7 @@ class UserRedux extends Component {
       gender,
       password,
     } = this.state;
+    console.log("check gender", gender);
 
     return (
       <div className="user-redux-container">
@@ -299,7 +301,6 @@ class UserRedux extends Component {
                 <label>
                   <FormattedMessage id="manage-user.Gender" />
                 </label>
-
                 <select
                   value={gender}
                   className="form-control"

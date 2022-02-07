@@ -31,7 +31,6 @@ class DetailDoctor extends Component {
           currentDoctorId: id,
         });
       }
-      //   imageBase64 = new Buffer(user.image, "base64").toString("binary");
     }
   }
   componentDidUpdate(prevProps, prevState, snapshot) {}
@@ -46,7 +45,7 @@ class DetailDoctor extends Component {
       nameVi = `${DetailDoctors.positionData.valueVi},  ${DetailDoctors.lastName} ${DetailDoctors.firstName}`;
       nameEn = `${DetailDoctors.positionData.valueEn}, ${DetailDoctors.firstName} ${DetailDoctors.lastName}`;
     }
-
+    console.log("check currentDoctorId", this.state.currentDoctorId);
     return (
       <>
         <HeaderHomePage isShowBanner={false} />
