@@ -1,0 +1,167 @@
+.slick-prev:before,
+.slick-next:before {
+  font-family: "Glyphicons Halflings" !important;
+  color: red !important;
+}
+.slick-next {
+  right: -10 !important;
+  z-index: 1000 !important;
+  height: 48px !important ;
+  width: 44px !important;
+  background: #fff !important;
+  border: 2px solid #d7d7d7 !important;
+
+  &.hover {
+    background: #ececec !important;
+  }
+}
+.slick-prev {
+  left: -10 !important;
+  z-index: 1000 !important;
+  height: 48px !important ;
+  width: 44px !important;
+  background: #fff !important;
+  border: 2px solid #d7d7d7 !important;
+
+  &.hover {
+    background: #ececec !important;
+  }
+}
+.slick-disabled {
+  display: none !important;
+}
+.section-share {
+  &.section-specialty {
+    background: #f5f5f5;
+  }
+  &.section-oustanding-doctor {
+    background: #f5f5f5;
+  }
+
+  .section-body {
+    .section-customize {
+      cursor: pointer;
+      .bg-image {
+        height: 150px;
+        width: 278px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: #eee;
+        // &.section-specialty {
+        //   background: url("../../../assets/120331-co-xuong-khop.jpg");
+        // }
+        &.section-medical-facility {
+          // background: url("../../../assets/093035-benh-vien-thu-cuc-1.jpg");
+        }
+        &.section-oustanding-doctor {
+          // background: url("../../../assets/105401-bsckii-tran-minh-khuyen.jpg");
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          margin-top: 10px;
+        }
+        &.section-handbook {
+          background: url("../../../assets/084008-lich-kham-6-bac-si-khoa-chan-thuong-chinh-hinh-benh-vien-viet-duc.jpg");
+        }
+      }
+    }
+  }
+}
+.section-share {
+  height: 330px;
+  &.section-about {
+    border: 1px solid #f5f5f5;
+    height: 500px;
+    .section-about-header {
+      padding: 20px 10px;
+
+      .title-content {
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0 100px;
+      .section-about-content {
+        display: flex;
+        width: 100%;
+        gap: 15px;
+        .content-left {
+          width: 60%;
+        }
+        .content-right {
+          width: 40%;
+          p {
+            text-align: justify;
+            font-style: italic;
+            padding-top: 15px;
+          }
+        }
+      }
+    }
+  }
+
+  .section-container {
+    margin: 0 100px;
+    display: flex;
+    flex-direction: column;
+    .section-header {
+      height: 60px;
+      margin-bottom: 20px;
+      padding-top: 20px;
+      .title-section {
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .btn-section {
+        border: none;
+        outline: none;
+        padding: 10px 15px;
+        float: right;
+        background-color: #ebebeb;
+        color: black;
+        cursor: pointer;
+        text-transform: uppercase;
+        &:hover {
+          background-color: #f7d800;
+          color: white;
+        }
+      }
+    }
+  }
+}
+.section-oustanding-doctor {
+  .title-doctor,
+  .bg-image {
+    color: black;
+    cursor: pointer;
+    &:hover {
+      color: #60c3d7;
+    }
+  }
+  .section-customize {
+    padding: 5px;
+    .custome-boder {
+      border: 1px solid orange;
+    }
+    .outer-bg {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+      border-radius: 50%;
+    }
+  }
+}
+.HomeFooter {
+  text-align: center;
+  padding-top: 8px;
+  color: white;
+
+  background-color: #64b9e5;
+  a {
+    text-decoration: none;
+  }
+}
+// reset slick slider css

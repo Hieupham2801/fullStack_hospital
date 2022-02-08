@@ -1,0 +1,8 @@
+.specialty-child {
+  .specialty-name {
+    padding: 10px 0;
+    &:hover {
+      color: blue;
+    }
+  }
+}

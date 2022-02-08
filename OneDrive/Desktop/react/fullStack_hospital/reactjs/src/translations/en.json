@@ -1,0 +1,101 @@
+{
+    "header": {
+        "Email": "Email",
+        "First-Name": "First Name",
+        "Last-Name": "Last Name",
+        "Address": "Address",
+        "Action": "Action"
+    },
+    "home-header": {
+        "Popular-specialty": "Popular specialty",
+        "specialty": "Medical specialty",
+        "SearchDoctor": "Find a doctor by specialty",
+        "Health-facility": "Health facility",
+        "Choose-clinic": "Choose hospital clinic",
+        "Doctor": "Doctor",
+        "Choose-doctor": "Choose a good doctor",
+        "examination-package": "Examination package",
+        "General-health-check": "General health check",
+        "Support": "Support",
+        "Medical-background": "MEDICAL BACKGROUND",
+        "Health-care": "COMPREHENSIVE HEALTH CARE",
+        "Specialist-examination": "Specialist examination",
+        "Remote-examination": "Remote examination",
+        "General-examination": "general examination",
+        "Medical-test": "Medical test",
+        "Mental-health": "Mental health",
+        "Dental-examination": "Dental examination",
+        "Welcome": "Welcome",
+        "Outstanding-Doctor-Week": "Outstanding Doctor of the Week",
+        "handbook": "Hand book",
+        "Outstanding-Health-facility": "Outstanding health facility"
+    },
+    "manage-doctor": {
+        "Title": "ADD NEW INFORMATION DOCTOR",
+        "Choose-doctor": "CHOOSE DOCTOR",
+        "Info-introduce": "INFORMATION INTRODUCE",
+        "List-price": "LIST PRICE",
+        "Create": "CREATE",
+        "Save": "SAVE",
+        "Payment-methods": "payment methods",
+        "Choose-city": "Choose city",
+        "Choose-price": "Choose price",
+        "Clinic-address": "Clinic address",
+        "Choose-specialty": "Choose specialty",
+        "Choose-clinic": "Choose clinic",
+        "Note": "Note",
+        "Clinic-name": "Clinic name"
+    },
+    "manage-schedule": {
+        "Title": "Manage Doctor's schedule",
+        "Choose-doctor": "Choose doctor",
+        "Choose-day": "Choose day",
+        "Save": "Save"
+    },
+    "menu": {
+        "system": {
+            "header": "System",
+            "system-administrator": {
+                "header": "System Administrator",
+                "user-manage": "User manage",
+                "user-redux": "Manage user using redux",
+                "register-package-group-or-account": "Register service package for group/account"
+            },
+            "system-parameter": {
+                "header": "System-parameter"
+            }
+        },
+        "admin": {
+            "manage-user": "Manage user",
+            "manage-doctor": "Manage doctor",
+            "manage-admin": "Manage admin",
+            "crud": "CRUD user",
+            "crud-redux": "Crud user",
+            "clinic": "clinic",
+            "manage-clinic": "Manage clinic",
+            "specialty": "Specialty",
+            "manage-specialty": "Manage specialty",
+            "handbook": "Hand book",
+            "manage-handbook": "Manage hand book"
+        },
+        "doctor": {
+            "manage-schedule": "Manage schedule",
+            "manage-patient": "Manage patient"
+        }
+    },
+    "manage-user": {
+        "Add-user": "Add new user",
+        "Email": "Email",
+        "First-Name": "First name",
+        "Last-Name": "Last name",
+        "Address": "Address",
+        "Password": "Password",
+        "Phone-number": "Phone number",
+        "Gender": "Gender",
+        "Position": "Position",
+        "Role": "Role",
+        "Save": "Save",
+        "Edit": "Edit",
+        "Image": "Image"
+    }
+}
