@@ -35,11 +35,10 @@ class Header extends Component {
         menuApp: menu,
       });
     }
-    
   }
   render() {
     const { processLogout, language, userInfo } = this.props;
-    console.log("check userinfo", this.props.userInfo);
+
     return (
       <div className="header-container">
         {/* thanh navigator */}

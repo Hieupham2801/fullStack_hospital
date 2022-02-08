@@ -17,7 +17,7 @@ class HeaderHomePage extends Component {
   };
   render() {
     let language = this.props.language;
-    console.log("this props", this.props.userInfo);
+
     return (
       <>
         <div className="home-header-container">

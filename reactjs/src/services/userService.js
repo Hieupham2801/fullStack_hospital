@@ -1,5 +1,4 @@
 import axios from "../axios";
-
 const handleLoginApi = (email, password) => {
   return axios.post("api/login", { email, password });
 };
@@ -7,7 +6,6 @@ const getAllUser = (inputId) => {
   return axios.get(`/api/get-all-users?id=${inputId}`);
 };
 const CreateNewUserService = (data) => {
-  console.log("check data from services", data);
   return axios.post("/api/create-new-users", data);
 };
 const DeleteUserService = (userId) => {
@@ -31,6 +29,54 @@ const saveInforDoctorsServices = (data) => {
 const getDetailInforDoctor = (id) => {
   return axios.get(`/api/get-infor-doctor-by-id?id=${id}`);
 };
+const bulkCreateSchedule = (data) => {
+  return axios.post("/api/bulk-create-schedule", data);
+};
+const getScheduleByDate = (doctorId, date) => {
+  return axios.get(
+    `/api/get-schedule-by-date?doctorId=${doctorId}&date=${date}`
+  );
+};
+const getExtraInforDr = (doctorId) => {
+  return axios.get(`/api/get-extra-info-doctor-by-id?doctorId=${doctorId}`);
+};
+const getProfileDoctorById = (doctorId) => {
+  return axios.get(`api/get-profile-doctor-by-id?doctorId=${doctorId}`);
+};
+const postPatientBooking = (data) => {
+  return axios.post("/api/patient-book-appointment", data);
+};
+const postVerifyEmail = (data) => {
+  return axios.post("/api/verify-book-appointment", data);
+};
+//specialty
+const createNewSpecialty = (data) => {
+  return axios.post("/api/create-new-specialty", data);
+};
+const getAllSpecialty = () => {
+  return axios.get("/api/get-all-info-specialty");
+};
+const getDetailSpecialtyById = (data) => {
+  return axios.get(
+    `/api/get-detail-info-specialty-by-id?id=${data.id}&location=${data.location}`
+  );
+};
+//clinic
+const createNewClinic = (data) => {
+  return axios.post("/api/create-new-clinic", data);
+};
+const getAllClinic = () => {
+  return axios.get("/api/get-all-info-clinic");
+};
+const getDetailClinicById = (data) => {
+  return axios.get(`/api/get-detail-info-clinic-by-id?id=${data.id}`);
+};
+const getListPatientForDoctor = (data) => {
+  return axios.get(
+    `/api/get-list-patient-for-doctor?doctorId=${data.doctorId}&date=${data.date}`
+  );
+};
+
 export {
   handleLoginApi,
   getAllUser,
@@ -42,4 +88,17 @@ export {
   getAllDoctorServices,
   saveInforDoctorsServices,
   getDetailInforDoctor,
+  bulkCreateSchedule,
+  getScheduleByDate,
+  getExtraInforDr,
+  getProfileDoctorById,
+  postPatientBooking,
+  postVerifyEmail,
+  createNewSpecialty,
+  getAllSpecialty,
+  getDetailSpecialtyById,
+  createNewClinic,
+  getAllClinic,
+  getDetailClinicById,
+  getListPatientForDoctor,
 };

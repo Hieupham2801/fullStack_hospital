@@ -4,11 +4,14 @@ import HeaderHomePage from "../../HomePage/HeaderHomePage";
 import { LANGUAGES } from "../../../utils";
 import { getDetailInforDoctor } from "../../../services/userService";
 import "./DoctorDetail.scss";
+import DoctorSchedule from "./DoctorSchedule";
+import DoctorExtraInfo from "./DoctorExtraInfo";
 class DetailDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
       DetailDoctors: {},
+      currentDoctorId: -1,
     };
   }
   async componentDidMount() {
@@ -18,16 +21,19 @@ class DetailDoctor extends Component {
       this.props.match.params.id
     ) {
       let id = this.props.match.params.id;
+      this.setState({
+        currentDoctorId: id,
+      });
       let res = await getDetailInforDoctor(id);
       if (res && res.errCode === 0) {
         this.setState({
           DetailDoctors: res.data,
+          currentDoctorId: id,
         });
       }
-      //   imageBase64 = new Buffer(user.image, "base64").toString("binary");
     }
   }
-  componentDidUpdate() {}
+  componentDidUpdate(prevProps, prevState, snapshot) {}
   render() {
     let { language } = this.props;
     let { DetailDoctors } = this.state;
@@ -39,7 +45,7 @@ class DetailDoctor extends Component {
       nameVi = `${DetailDoctors.positionData.valueVi},  ${DetailDoctors.lastName} ${DetailDoctors.firstName}`;
       nameEn = `${DetailDoctors.positionData.valueEn}, ${DetailDoctors.firstName} ${DetailDoctors.lastName}`;
     }
-    console.log("check state", this.state);
+    console.log("check currentDoctorId", this.state.currentDoctorId);
     return (
       <>
         <HeaderHomePage isShowBanner={false} />
@@ -61,14 +67,25 @@ class DetailDoctor extends Component {
 
                 <div className="icon my-2">
                   <button className="btn btn-primary px-2 ">
-                    <i class="far fa-thumbs-up"></i> Thích
+                    <i className="far fa-thumbs-up"></i> Thích
                   </button>
                   <button className="btn btn-primary px-2 ">Chia sẻ</button>
                 </div>
               </div>
             </div>
           </div>
-          <div className="schedule-doctor"></div>
+          <div className="schedule-doctor">
+            <div className="content-left">
+              <DoctorSchedule
+                DetailDoctorFromParent={this.state.currentDoctorId}
+              />
+            </div>
+            <div className="content-right">
+              <DoctorExtraInfo
+                GetDoctorIdFromDtDr={this.state.currentDoctorId}
+              />
+            </div>
+          </div>
           <div className="detail-doctor">
             {DetailDoctors.Markdown && DetailDoctors.Markdown.contentHTML && (
               <div

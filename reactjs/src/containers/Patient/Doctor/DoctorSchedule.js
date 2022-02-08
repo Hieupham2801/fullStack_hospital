@@ -1,29 +1,56 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./DoctorSchedule.scss";
 import "./DoctorDetail.scss";
 import localization from "moment/locale/vi";
 import { LANGUAGES } from "../../../utils";
 import moment from "moment";
+import BookingModal from "./Modal/BookingModal";
 import { getScheduleByDate } from "../../../services/userService";
+import "./DoctorSchedule.scss";
 class DoctorSchedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allDays: [],
       aVailableTime: [],
+      isOpenModalBooking: false,
+      dataModalSchedule: {},
     };
   }
   async componentDidMount() {
     let { language } = this.state;
-    this.setArrayday(language);
+    let allDays = await this.getArrayDay(language);
+    if (this.props.DetailDoctorFromParent) {
+      let res = await this.props.DetailDoctorFromParent;
+      this.setState({
+        aVailableTime: res.data ? res.data : [],
+      });
+    }
+
+    this.setState({
+      allDays: allDays,
+    });
   }
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  async componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.language !== prevProps.language) {
-      this.setArrayday(this.props.language);
+      let allDays = await this.getArrayDay(this.props.language);
+      this.setState({
+        allDays: allDays,
+      });
+    }
+    if (
+      this.props.DetailDoctorFromParent !== prevProps.DetailDoctorFromParent
+    ) {
+      let allDays = this.getArrayDay(this.props.language);
+
+      let res = await this.props.DetailDoctorFromParent;
+
+      this.setState({
+        aVailableTime: res.data ? res.data : [],
+      });
     }
   }
-  setArrayday = async (language) => {
+  getArrayDay = async (language) => {
     let allDays = [];
     for (let i = 0; i < 7; i++) {
       let obj = {};
@@ -40,9 +67,7 @@ class DoctorSchedule extends Component {
       allDays.push(obj);
     }
 
-    this.setState({
-      allDays: allDays,
-    });
+    return allDays;
   };
   handleChangeSelect = async (event) => {
     if (
@@ -58,52 +83,80 @@ class DoctorSchedule extends Component {
           aVailableTime: res.data ? res.data : [],
         });
       }
-      console.log("check res 2", res);
     }
   };
   capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+  handleClickScheduleTime = (time) => {
+    this.setState({
+      isOpenModalBooking: true,
+      dataModalSchedule: time,
+    });
+  };
+  closeBookingModal = () => {
+    this.setState({
+      isOpenModalBooking: false,
+    });
+  };
   render() {
     let { language } = this.props;
-    console.log("check language", language);
-    let { allDays, aVailableTime } = this.state;
+
+    let { allDays, aVailableTime, isOpenModalBooking, dataModalSchedule } =
+      this.state;
     return (
-      <div className="Doctor-schedule-container">
-        <div className="all-schedule">
-          <select onChange={(event) => this.handleChangeSelect(event)}>
-            {allDays &&
-              allDays.length > 0 &&
-              allDays.map((item, index) => {
-                return (
-                  <option key={index} value={item.value}>
-                    {item.label}
-                  </option>
-                );
-              })}
-          </select>
-        </div>
-        <div className="all-available">
-          <div className="text-calender">
-            <i className="fas fa-calendar-alt">
-              <span> Schedule</span>
-            </i>
+      <>
+        <div className="Doctor-schedule-container">
+          <div className="all-schedule">
+            <select onChange={(event) => this.handleChangeSelect(event)}>
+              {allDays &&
+                allDays.length > 0 &&
+                allDays.map((item, index) => {
+                  return (
+                    <option key={index} value={item.value}>
+                      {item.label}
+                    </option>
+                  );
+                })}
+            </select>
           </div>
-          <div className="time-content">
-            {aVailableTime && aVailableTime.length > 0 ? (
-              aVailableTime.map((item, index) => {
-                let timeDisplay =
-                  language === LANGUAGES.VI
-                    ? item.timeTypeData.valueVi
-                    : item.timeTypeData.valueEn;
-                return <button key={index}>{timeDisplay}</button>;
-              })
-            ) : (
-              <div> no schedule in this time , please choose another time</div>
-            )}
+          <div className="all-available">
+            <div className="text-calender">
+              <i className="fas fa-calendar-alt">
+                <span> Schedule</span>
+              </i>
+            </div>
+            <div className="time-content">
+              {aVailableTime && aVailableTime.length > 0 ? (
+                aVailableTime.map((item, index) => {
+                  let timeDisplay =
+                    language === LANGUAGES.VI
+                      ? item.timeTypeData.valueVi
+                      : item.timeTypeData.valueEn;
+                  return (
+                    <button
+                      key={index}
+                      className={
+                        language === LANGUAGES.VI ? "btn-vi" : "btn-en"
+                      }
+                      onClick={() => this.handleClickScheduleTime(item)}
+                    >
+                      {timeDisplay}
+                    </button>
+                  );
+                })
+              ) : (
+                <div>no schedule in this time , please choose another time</div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+        <BookingModal
+          isOpenModalBooking={isOpenModalBooking}
+          closeBookingModal={this.closeBookingModal}
+          dataModalSchedule={dataModalSchedule}
+        />
+      </>
     );
   }
 }

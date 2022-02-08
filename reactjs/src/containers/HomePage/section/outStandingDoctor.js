@@ -25,14 +25,13 @@ class OutStandingDoctor extends Component {
   }
   // detail doctor
   handleViewDoctor = (doctor) => {
-    console.log("check doctor from view infor", doctor);
     this.props.history.push(`/detail-doctor/${doctor.id}`);
   };
   render() {
     let { arrDoctor } = this.state;
-    let { language } = this.props;
+    let { language, nameSpecialty } = this.props;
     arrDoctor = arrDoctor.concat(arrDoctor).concat(arrDoctor);
-    console.log("check top doctor", this.props.topDoctorRedux);
+
     return (
       <div className="section-share section-oustanding-doctor">
         <div className="section-container">
@@ -72,7 +71,11 @@ class OutStandingDoctor extends Component {
                           <div className="title-doctor">
                             {language === LANGUAGES.VI ? nameVi : nameEn}
                           </div>
-                          <div>Cơ xương khớp 1</div>
+                          {nameSpecialty &&
+                            nameSpecialty.length > 0 &&
+                            nameSpecialty.map((item, index) => {
+                              return;
+                            })}
                         </div>
                       </div>
                     </div>

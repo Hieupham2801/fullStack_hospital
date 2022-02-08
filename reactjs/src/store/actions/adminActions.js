@@ -8,6 +8,8 @@ import {
   getTopDoctorService,
   getAllDoctorServices,
   saveInforDoctorsServices,
+  getAllSpecialty,
+  getAllClinic,
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -187,7 +189,7 @@ export const fetchTopDoctor = () => {
   return async (dispatch) => {
     try {
       let res = await getTopDoctorService("");
-      console.log("check res", res);
+
       if (res && res.errCode === 0) {
         dispatch({
           type: actionTypes.FETCH_TOP_DOCTOR_SUCCESS,
@@ -206,10 +208,11 @@ export const fetchAllDoctor = () => {
   return async (dispatch) => {
     try {
       let res = await getAllDoctorServices();
+
       if (res && res.errCode === 0) {
         dispatch({
           type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
-          data: res.data,
+          dataDr: res.doctors,
         });
       } else {
         toast.error("fetch doctor failded");
@@ -239,6 +242,7 @@ export const saveInforDoctor = (data) => {
         });
       }
     } catch (e) {
+      console.log("check err", e);
       toast.error("Save infor doctor failded");
     }
   };
@@ -261,6 +265,49 @@ export const fetchAllScheduleTime = () => {
       }
     } catch (e) {
       toast.error("fetch time failded");
+    }
+  };
+};
+// fetch doctor price
+export const getRequireDoctorInfo = () => {
+  return async (dispatch) => {
+    try {
+      let resPrice = await GetAllCodeService("PRICE");
+      let resPayment = await GetAllCodeService("PAYMENT");
+      let resProvince = await GetAllCodeService("PROVINCE");
+      let resSpecialty = await getAllSpecialty();
+      let resClinic = await getAllClinic();
+      // let resClinic = await getAllSpecialty();
+      if (
+        resPrice &&
+        resPrice.errCode === 0 &&
+        resPayment &&
+        resPayment.errCode === 0 &&
+        resProvince &&
+        resProvince.errCode === 0 &&
+        resSpecialty.errCode === 0 &&
+        resClinic &&
+        resClinic.errCode === 0
+      ) {
+        let dataRequire = {
+          resPrice: resPrice.data,
+          resPayment: resPayment.data,
+          resProvince: resProvince.data,
+          resSpecialty: resSpecialty.data,
+          resClinic: resClinic.data,
+        };
+        dispatch({
+          type: actionTypes.FETCH_ALL_REQUIRE_DOCTOR_SUCCESS,
+          dataRequire,
+        });
+      } else {
+        toast.error("fetch all require doctor failded");
+        dispatch({
+          type: actionTypes.FETCH_ALL_REQUIRE_DOCTOR_FAILDED,
+        });
+      }
+    } catch (e) {
+      toast.error("fetch all require doctor failded");
     }
   };
 };

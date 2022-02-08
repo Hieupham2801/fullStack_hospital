@@ -1,14 +1,15 @@
-.doctor-detail-container {
-  height: 500px;
-
+.profile-doctor-container {
+  .price {
+    padding-left: 10px;
+  }
   .intro-doctor {
     display: flex;
-    padding: 5px 100px;
 
     .content-left {
       width: 20%;
-
-      background: center no-repeat no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       width: 120px;
       height: 120px;
       border-radius: 50%;
@@ -28,7 +29,6 @@
       }
       .down {
         padding-top: 10px;
-        padding-right: 5px;
         .icon {
           margin-top: 15px;
           display: flex;
@@ -40,28 +40,5 @@
         }
       }
     }
-  }
-  .schedule-doctor {
-    margin: 0 100px;
-    display: flex;
-
-    padding: 10px 0;
-
-    min-height: 200px;
-    .content-left {
-      width: 50%;
-    }
-    .content-right {
-      width: 50%;
-    }
-  }
-  .detail-doctor {
-    border-top: 1px solid #cccccc;
-    padding: 10px 100px;
-    font-weight: 400;
-    font-size: 15px;
-    height: auto;
-
-    background-color: #f9f9f9;
   }
 }

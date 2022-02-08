@@ -5,6 +5,9 @@ export const path = {
   LOG_OUT: "/logout",
   SYSTEM: "/system",
   DETAIL_DOCTOR: "/detail-doctor/:id",
+  VERIFY_EMAIL_BOOKING: "/verify-booking",
+  DETAIL_SPECIALTY: "/detail-specialty/:id",
+  DETAIL_CLINIC: "/detail-clinic/:id",
 };
 
 export const LANGUAGES = {
@@ -23,7 +26,7 @@ export const CRUD_ACTIONS = {
 export const ROLE_USER = {
   ADMIN: "R1",
   DOCTOR: "R2",
-  PATIENT:'R3'
+  PATIENT: "R3",
 };
 
 export const dateFormat = {
