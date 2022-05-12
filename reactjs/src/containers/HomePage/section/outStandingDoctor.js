@@ -30,7 +30,8 @@ class OutStandingDoctor extends Component {
   render() {
     let { arrDoctor } = this.state;
     let { language, nameSpecialty } = this.props;
-    arrDoctor = arrDoctor.concat(arrDoctor).concat(arrDoctor);
+    console.log("check arrDoctor", arrDoctor);
+    // // arrDoctor = arrDoctor.concat(arrDoctor).concat(arrDoctor);
 
     return (
       <div className="section-share section-oustanding-doctor">
@@ -71,11 +72,6 @@ class OutStandingDoctor extends Component {
                           <div className="title-doctor">
                             {language === LANGUAGES.VI ? nameVi : nameEn}
                           </div>
-                          {nameSpecialty &&
-                            nameSpecialty.length > 0 &&
-                            nameSpecialty.map((item, index) => {
-                              return;
-                            })}
                         </div>
                       </div>
                     </div>

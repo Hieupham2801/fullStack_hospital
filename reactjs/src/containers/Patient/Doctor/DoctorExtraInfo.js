@@ -23,7 +23,17 @@ class DoctorExtraInfo extends Component {
       });
     }
   }
-  async componentDidUpdate(prevProps, prevState, snapshot) {}
+
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.GetDoctorIdFromDtDr !== this.props.GetDoctorIdFromDtDr) {
+      let res = await getExtraInforDr(this.props.GetDoctorIdFromDtDr);
+
+      this.setState({
+        extraInfo: res.data,
+      });
+    }
+  }
+
   showHideDetaiInfo = (status) => {
     this.setState({
       isShowdetailInfo: status,
@@ -115,7 +125,7 @@ class DoctorExtraInfo extends Component {
                   </span>
                 </div>
                 <div className="note">
-                  {extraInfo && extraInfo.note ? extraInfo.note : ""}
+                  Ghi chú: {extraInfo && extraInfo.note ? extraInfo.note : ""}
                 </div>
               </div>
               <div className="payment">

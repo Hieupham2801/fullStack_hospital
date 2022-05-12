@@ -285,7 +285,6 @@ class ManageDoctor extends Component {
       listProvince,
       listClinic,
     } = this.state;
-    console.log("check state", this.state.selectedSpecialty);
 
     return (
       <div className="manage-doctor-container">

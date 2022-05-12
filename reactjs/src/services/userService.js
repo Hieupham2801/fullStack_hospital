@@ -41,7 +41,7 @@ const getExtraInforDr = (doctorId) => {
   return axios.get(`/api/get-extra-info-doctor-by-id?doctorId=${doctorId}`);
 };
 const getProfileDoctorById = (doctorId) => {
-  return axios.get(`api/get-profile-doctor-by-id?doctorId=${doctorId}`);
+  return axios.get(`/api/get-profile-doctor-by-id?doctorId=${doctorId}`);
 };
 const postPatientBooking = (data) => {
   return axios.post("/api/patient-book-appointment", data);
@@ -53,8 +53,8 @@ const postVerifyEmail = (data) => {
 const createNewSpecialty = (data) => {
   return axios.post("/api/create-new-specialty", data);
 };
-const getAllSpecialty = () => {
-  return axios.get("/api/get-all-info-specialty");
+const getAllSpecialty = (data) => {
+  return axios.get("/api/get-all-info-specialty", data);
 };
 const getDetailSpecialtyById = (data) => {
   return axios.get(
@@ -65,8 +65,8 @@ const getDetailSpecialtyById = (data) => {
 const createNewClinic = (data) => {
   return axios.post("/api/create-new-clinic", data);
 };
-const getAllClinic = () => {
-  return axios.get("/api/get-all-info-clinic");
+const getAllClinic = (data) => {
+  return axios.get("/api/get-all-info-clinic", data);
 };
 const getDetailClinicById = (data) => {
   return axios.get(`/api/get-detail-info-clinic-by-id?id=${data.id}`);

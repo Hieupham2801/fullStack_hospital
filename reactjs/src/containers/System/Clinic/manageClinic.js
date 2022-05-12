@@ -59,7 +59,6 @@ class manageClinic extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {}
 
   render() {
-    console.log("check state", this.state);
     return (
       <div className="manage-clinic-container">
         <div className="ms-title">Manage Clinic</div>

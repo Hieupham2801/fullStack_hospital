@@ -53,7 +53,6 @@ class ManagePatient extends Component {
   render() {
     let { currentDate, dataPatient } = this.state;
     let language = this.props.language;
-    console.log("check state", this.state);
     return (
       <div className="manage-pt-container">
         <div className="m-pt-title">Manage Patient</div>

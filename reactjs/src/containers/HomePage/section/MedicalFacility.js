@@ -26,7 +26,6 @@ class MedicalFacility extends Component {
   }
   render() {
     let { dataClinic } = this.state;
-    console.log("check state", dataClinic);
     return (
       <div className="section-share section-medical-facility">
         <div className="section-container">
@@ -41,6 +40,12 @@ class MedicalFacility extends Component {
               {dataClinic &&
                 dataClinic.length > 0 &&
                 dataClinic.map((item, index) => {
+                  let imageBase64 = "";
+                  if (item.image) {
+                    imageBase64 = new Buffer(item.image, "base64").toString(
+                      "binary"
+                    );
+                  }
                   return (
                     <div
                       className="section-customize clinic-child"
@@ -49,7 +54,7 @@ class MedicalFacility extends Component {
                     >
                       <div
                         className="bg-image section-medical-facility"
-                        style={{ backgroundImage: `url(${item.image})` }}
+                        style={{ backgroundImage: `url(${imageBase64})` }}
                       />
 
                       <div className="clinic-name ">{item.name}</div>

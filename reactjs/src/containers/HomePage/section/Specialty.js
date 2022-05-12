@@ -4,7 +4,7 @@ import { FormattedMessage } from "react-intl";
 import Slider from "react-slick";
 import { getAllSpecialty } from "../../../services/userService";
 import "./Specialty.scss";
-
+import OutStandingDoctor from "./OutStandingDoctor";
 import { withRouter } from "react-router";
 
 class Specialty extends Component {
@@ -43,6 +43,12 @@ class Specialty extends Component {
               {dataSpecialty &&
                 dataSpecialty.length > 0 &&
                 dataSpecialty.map((item, index) => {
+                  let imageBase64 = "";
+                  if (item.image) {
+                    imageBase64 = new Buffer(item.image, "base64").toString(
+                      "binary"
+                    );
+                  }
                   return (
                     <div
                       className="section-customize specialty-child"
@@ -51,7 +57,7 @@ class Specialty extends Component {
                     >
                       <div
                         className="bg-image section-specialty"
-                        style={{ backgroundImage: `url(${item.image})` }}
+                        style={{ backgroundImage: `url(${imageBase64})` }}
                       ></div>
                       <div className="specialty-name">{item.name}</div>
                     </div>
@@ -59,7 +65,7 @@ class Specialty extends Component {
                 })}
             </Slider>
           </div>
-          <outStandingDoctor nameSpecialty={dataSpecialty.name} />
+          {/* <OutStandingDoctor nameSpecialty={dataSpecialty.name} /> */}
         </div>
       </div>
     );
